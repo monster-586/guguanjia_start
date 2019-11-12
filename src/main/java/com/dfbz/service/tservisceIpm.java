@@ -1,6 +1,6 @@
 package com.dfbz.service;
 
-import com.dfbz.entity.AppVersion;
+
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
@@ -12,9 +12,7 @@ public class tservisceIpm<T> implements tservice<T> {
     Mapper<T> mapper;
 
     @Override
-    public int deleteByPrimaryKey(Object key) {
-        return mapper.deleteByPrimaryKey(key);
-    }
+    public int deleteByPrimaryKey(Object key) {return mapper.deleteByPrimaryKey(key); }
 
     @Override
     public int delete(T t) {
@@ -93,21 +91,21 @@ public class tservisceIpm<T> implements tservice<T> {
 
     @Override
     public int updateByExample(T t, Object example) {
-        return mapper.updateByExample(t,example);
+        return mapper.updateByExample(t, example);
     }
 
     @Override
     public int updateByExampleSelective(T t, Object example) {
-        return mapper.updateByExampleSelective(t,example);
+        return mapper.updateByExampleSelective(t, example);
     }
 
     @Override
     public List<T> selectByExampleAndRowBounds(Object example, RowBounds rowBounds) {
-        return mapper.selectByExampleAndRowBounds(example,rowBounds);
+        return mapper.selectByExampleAndRowBounds(example, rowBounds);
     }
 
     @Override
     public List<T> selectByRowBounds(T t, RowBounds rowBounds) {
-        return mapper.selectByRowBounds(t,rowBounds);
+        return mapper.selectByRowBounds(t, rowBounds);
     }
 }
