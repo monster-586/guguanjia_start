@@ -738,7 +738,7 @@
                                                     >{{app.versionNo}}</a>
                                                 </td>
                                                 <td class="center">
-                                                    {{app.platfrom}}
+                                                    {{app.platform==0?'安卓系统':'ios系统'}}
                                                 </td>
                                                 <td class="center">
                                                     {{app.forceUpdate==1?'是':'否'}}
@@ -751,10 +751,10 @@
                                                 <td class="center">{{app.createDate}}</td>
                                                 <td class="center">
                                                     <div class="hidden-sm hidden-xs action-buttons">
-                                                        <a class="green" href="#" title="编辑">
+                                                        <a class="green"title="编辑" @Click="toupdata(app.id)">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
-                                                        <a class="red" href="#" title="删除">
+                                                        <a class="red" href="" title="删除">
 
                                                             <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                         </a>
@@ -775,15 +775,15 @@
                                             </div>
                                             <div>
                                                 <div class="pagination no-margin pull-right clearfix">
-                                                    <li ><a  @Click="selectALL(1,pageInfo.pageSize)">首页</a>
+                                                    <li ><a  @Click="selectAll(1,pageInfo.pageSize)">首页</a>
                                                     </li>
-                                                    <li class="active"><a  @Click="selectALL(pageInfo.prePage,pageInfo.pageSize)" :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
+                                                    <li class="active"><a  @Click="selectAll(pageInfo.prePage,pageInfo.pageSize)" :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
                                                     </li>
                                                     <li class=""><a onclick="">{{pageInfo.pageNum}}</a>
                                                     </li>
-                                                    <li class="active"><a @Click="selectALL(pageInfo.nextPage,pageInfo.pageSize)" :class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
+                                                    <li class="active"><a @Click="selectAll(pageInfo.nextPage,pageInfo.pageSize)" :class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
                                                     </li>
-                                                    <li ><a  @Click="selectALL(pageInfo.pages,pageInfo.pageSize)">尾页</a>
+                                                    <li ><a  @Click="selectAll(pageInfo.pages,pageInfo.pageSize)">尾页</a>
                                                     </li>
                                                 </div>
 

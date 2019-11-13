@@ -6,7 +6,7 @@ let em = new Vue({
 
     },
     methods: {
-        selectALL: function (pageNum, pageSize) {
+        selectAll: function (pageNum, pageSize) {
             axios({
                 url: "app/controller/selectAll",
                 // method:"get",
@@ -17,30 +17,43 @@ let em = new Vue({
                 }
 
             }).then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 this.pageInfo = response.data;
             }).catch(function (error) {
                 console.log(error)
             })
         },
-        updata: function (id) {
+        toupdata: function (id) {
             axios({
                 url: 'app/controller/toupdata',
                 params: {
-                    id:id
+                    id: id
                 }
             }).then(response => {
-                this.appversion=response.data;
+                layer.appversion = response.data;
+                console.log(layer)
+                let upd = layer.open({
+                    type: 2,
+                    title: "更新",
+                    content: 'html/app/update.html',
+                    area: ['80%', '80%'],
+                    end: () => {
+
+                        this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize)
+                    }
+                });
+
+
             }).catch(function (error) {
                 console.log(error)
-            })
+            });
 
 
         }
     },
     created: function () {
 
-        this.selectALL();
+        this.selectAll();
     }
 
 

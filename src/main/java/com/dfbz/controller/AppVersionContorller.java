@@ -28,9 +28,13 @@ public class AppVersionContorller {
 
     @RequestMapping("updata")
     @ResponseBody
-    public int updateByPrimaryKey(@RequestBody AppVersion appVersion) {
+    public String updateByPrimaryKey(@RequestBody AppVersion appVersion) {
         int i = appVersionService.updateByPrimaryKey(appVersion);
-        return i;
+        String mag="操作失败";
+        if (i>0){
+        mag="操作成功";
+        }
+        return mag;
     }
 
     @RequestMapping("toupdata")
