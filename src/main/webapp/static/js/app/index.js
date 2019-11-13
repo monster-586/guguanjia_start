@@ -1,22 +1,46 @@
 let em = new Vue({
-    el: '#mian-container',
+    el: '#main-container',
     data: {
-        pageInfo: {
-            pageNum: 1,
-            pageSize: 4
-     }
+        pageInfo: {},
+        appversion: {}
+
     },
     methods: {
-        fun: function () {
+        selectALL: function (pageNum, pageSize) {
             axios({
-                url:"index",
-                param:{
-                    pageNum: 1,
-                    pageSize: 4
+                url: "app/controller/selectAll",
+                // method:"get",
+                params: {
+                    pageNum: pageNum,
+                    pageSize: pageSize
+
                 }
 
+            }).then(response => {
+                // console.log(response.data);
+                this.pageInfo = response.data;
+            }).catch(function (error) {
+                console.log(error)
             })
+        },
+        updata: function (id) {
+            axios({
+                url: 'app/controller/toupdata',
+                params: {
+                    id:id
+                }
+            }).then(response => {
+                this.appversion=response.data;
+            }).catch(function (error) {
+                console.log(error)
+            })
+
+
         }
+    },
+    created: function () {
+
+        this.selectALL();
     }
 
 

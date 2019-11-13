@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AppVersionServiceImp extends tservisceIpm implements AppVersionService {
+public class AppVersionServiceImp extends tservisceIpm<AppVersion> implements AppVersionService {
 
     @Override
     public PageInfo<AppVersion> selectAll(Integer pageNum, Integer pageSize) {

@@ -3,8 +3,10 @@ package com.dfbz.service;
 import com.dfbz.entity.AppVersion;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
 
-public interface AppVersionService {
+
+public interface AppVersionService extends tservice<AppVersion>{
+
+
     PageInfo<AppVersion> selectAll(Integer pageNum,Integer pageSize);
 }

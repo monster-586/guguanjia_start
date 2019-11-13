@@ -3,65 +3,50 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-	<meta charset="utf-8" />
+	<base href="/guguanjia/">
+	<meta charset="utf-8"/>
 	<meta name="renderer" content="webkit">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<title>固管家服务平台</title>
 
-	<meta name="description" content="index" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="index"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
 	<!-- bootstrap & fontawesome -->
-	<link rel="stylesheet" href="../../../static/bootstrap/bootstrap.min.css" />
-	<link rel="stylesheet" href="../../../static/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="static/bootstrap/bootstrap.min.css"/>
+	<link rel="stylesheet" href="static/css/font-awesome.min.css"/>
 
-	<link rel="stylesheet" href="../../../static/chosen/chosen.min.css" />
+	<link rel="stylesheet" href="static/chosen/chosen.min.css"/>
 
 	<!-- ace styles -->
-	<link rel="stylesheet" href="../../../static/ace/css/ace.min.css" id="main-ace-style" />
+	<link rel="stylesheet" href="static/ace/css/ace.min.css" id="main-ace-style"/>
 
-	<!--[if lte IE 9]>
-	<link rel="stylesheet" href="../../../static/ace/css/ace-part2.min.css"/>
-	<![endif]-->
-	<link rel="stylesheet" href="../../../static/ace/css/ace-skins.min.css" />
-	<link rel="stylesheet" href="../../../static/ace/css/ace-rtl.min.css" />
 
-	<!--[if lte IE 9]>
-	<link rel="stylesheet" href="../../../static/ace/css/ace-ie.min.css"/>
-	<![endif]-->
+	<link rel="stylesheet" href="static/ace/css/ace-skins.min.css"/>
+	<link rel="stylesheet" href="static/ace/css/ace-rtl.min.css"/>
 
-	<link rel="stylesheet" href="../../../static/ztree/metro.css" />
-	<link rel="stylesheet" href="../../../static/validate/css/validform.css" />
-	<link rel="stylesheet" href="../../../static/css/custom.css" />
+
+
+	<link rel="stylesheet" href="static/ztree/metro.css"/>
+	<link rel="stylesheet" href="static/validate/css/validform.css"/>
+	<link rel="stylesheet" href="static/css/custom.css"/>
 
 	<!--[if !IE]> -->
-	<script src="../../../static/jquery/jquery.js"></script>
+	<script src="static/jquery/jquery.js"></script>
 	<!-- <![endif]-->
 
-	<!--[if IE]>
-	<script src="../../../static/jquery/jquery-1.11.1.min.js"></script>
-	<!-- <![endif]-->
 
 
 	<!-- ace settings handler -->
-	<script src="../../../static/ace/js/ace-extra.min.js"></script>
+	<script src="static/ace/js/ace-extra.min.js"></script>
 
-	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-	<!--[if lte IE 8]>
-	<script src="../../../static/bootstrap/html5shiv.min.js"></script>
-	<script src="../../../static/bootstrap/respond.min.js"></script>
-	<script>var ie8 = "ie8";</script>
-	<![endif]-->
 </head>
 
 <body class="no-skin" id="body-content">
 <!-- 顶部条 -->
 <div id="navbar" class="navbar navbar-default">
-	<script type="text/javascript">
-        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-	</script>
+
 
 	<div class="navbar-container clearfix" id="navbar-container">
 		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
@@ -167,7 +152,7 @@
 
 				<li class="light-blue">
 					<a data-toggle="dropdown"  class="dropdown-toggle">
-						<img class="nav-user-photo" src="../../../static/img/small-male-pic.png" />
+						<img class="nav-user-photo" src="static/img/small-male-pic.png" />
 						<span class="user-info">
 									<small>你好,</small>
 									超级管理员
@@ -200,15 +185,11 @@
 </div>
 <!-- 主体 -->
 <div class="main-container" id="main-container">
-	<script type="text/javascript">
-        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-	</script>
+
 
 
 	<div id="sidebar" class="sidebar responsive">
-		<script type="text/javascript">
-            try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-		</script>
+
 
 		<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 			<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
@@ -614,17 +595,13 @@
 			<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
 		</div>
 
-		<script type="text/javascript">
-            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-		</script>
+
 	</div>
 
 
 	<div class="main-content">
 		<div class="breadcrumbs" id="breadcrumbs">
-			<script type="text/javascript">
-                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-			</script>
+
 
 			<ul class="tab" id="breadcrumb">
 				<!-- <li class="active" >
@@ -769,7 +746,7 @@
 												<td class="center">2016-07-27 17:37:59</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'4'}"
@@ -807,7 +784,7 @@
 												<td class="center">2016-07-27 17:42:10</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'5'}"
@@ -846,7 +823,7 @@
 												<td class="center">2016-08-24 14:56:39</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'6'}"
@@ -885,7 +862,7 @@
 												<td class="center">2016-09-10 15:35:56</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'7'}"
@@ -924,7 +901,7 @@
 												<td class="center">2016-09-10 15:37:05</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'8'}"
@@ -963,7 +940,7 @@
 												<td class="center">2017-03-11 12:04:42</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'9'}"
@@ -1002,7 +979,7 @@
 												<td class="center">2017-03-16 15:05:00</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'10'}"
@@ -1041,7 +1018,7 @@
 												<td class="center">2016-07-27 16:25:31</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'1'}"
@@ -1080,7 +1057,7 @@
 												<td class="center">2016-07-27 16:59:18</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'2'}"
@@ -1119,7 +1096,7 @@
 												<td class="center">2016-07-27 17:37:42</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="save.html" title="处理需求"
+														<a class="green" href="update.html" title="处理需求"
 														   data-mode="page" data-title="需求处理"
 														   data-url="demand/edit/showlayer"
 														   data-data="{id:'3'}"
@@ -1186,18 +1163,22 @@
 <!-- basic scripts -->
 
 
-
-<script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='../../static/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-<script src="../../../static/bootstrap/bootstrap.min.js"></script>
+<script src="static/bootstrap/bootstrap.min.js"></script>
 
 <!-- ace scripts -->
-<script src="../../../static/ace/js/ace-elements.min.js"></script>
-<script src="../../../static/ace/js/ace.min.js"></script>
+<script src="static/ace/js/ace-elements.min.js"></script>
+<script src="static/ace/js/ace.min.js"></script>
 
 <script type="text/javascript">
-    var ctxPath = "../..";
+	try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+
+	try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+
+	try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+
+	try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+
+	try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
     window.onload=function(){
         /* $("#ace-settings-navbar").trigger("click");//固定头部导航栏
         $("#ace-settings-sidebar").trigger("click");//固定左侧菜单
@@ -1206,17 +1187,17 @@
 </script>
 
 <!-- 引入其他js -->
-<script src="../../../static/js/history.js"></script>
-<script type="text/javascript" src="../../../static/layer/layer.js"></script>
-<script type="text/javascript" src="../../../static/js/spin.min.js"></script>
-<script type="text/javascript" src="../../../static/ztree/jquery.ztree.all-3.5.min.js"></script>
-<script type="text/javascript" src="../../../static/js/jquery.autosize.min.js"></script>
-<script type="text/javascript" src="../../../static/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="../../../static/validate/Validform_v5.3.2_min.js"></script>
-<script type="text/javascript" src="../../../static/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../../static/js/bootstrap-contextmenu.js"></script>
-<script type="text/javascript" src="../../../static/js/jquery.nicescroll.min.js"></script>
-<script type="text/javascript" src="../../../static/js/public.js"></script>
+<script src="static/js/history.js"></script>
+<script type="text/javascript" src="static/layer/layer.js"></script>
+<script type="text/javascript" src="static/js/spin.min.js"></script>
+<script type="text/javascript" src="static/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.autosize.min.js"></script>
+<script type="text/javascript" src="static/chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="static/validate/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="static/js/jquery.form.js"></script>
+<script type="text/javascript" src="static/js/bootstrap-contextmenu.js"></script>
+<script type="text/javascript" src="static/js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="static/js/public.js"></script>
 <!--<script type="text/javascript" src="../../static/jquery/jquery.js"></script>-->
 
 </body>
