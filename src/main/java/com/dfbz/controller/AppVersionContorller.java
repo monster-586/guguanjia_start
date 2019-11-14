@@ -3,8 +3,10 @@ package com.dfbz.controller;
 import com.dfbz.entity.AppVersion;
 import com.dfbz.service.AppVersionService;
 import com.github.pagehelper.PageInfo;
+import com.sun.xml.internal.ws.api.pipe.ContentType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("app/controller")
+@RequestMapping("manager/app")
 public class AppVersionContorller {
     @Autowired
     AppVersionService appVersionService;
@@ -26,19 +28,32 @@ public class AppVersionContorller {
         return pageInfo;
     }
 
-    @RequestMapping("updata")
+    @RequestMapping(value = "updata",produces = "html/text;charset=utf-8")
     @ResponseBody
     public String updateByPrimaryKey(@RequestBody AppVersion appVersion) {
-        int i = appVersionService.updateByPrimaryKey(appVersion);
-        String mag="操作失败";
-        if (i>0){
-        mag="操作成功";
+        int i = appVersionService.updateByPrimaryKeySelective(appVersion);
+        String mag = "操作失败";
+        if (i > 0) {
+            mag = "操作成功";
         }
         return mag;
     }
 
-    @RequestMapping("toupdata")
+    @RequestMapping(value = "toupdata")
     @ResponseBody
-    public AppVersion toUpdate(Long id){
+    public AppVersion toUpdate(Long id) {
         return appVersionService.selectByPrimaryKey(id);
-    }}
+    }
+
+    @RequestMapping(value = "del",produces = "html/text;charset=utf-8")
+    @ResponseBody
+    public String deleteByPrimaryKey(Long id) {
+        int i=appVersionService.deleteByPrimaryKey(id);
+        String mag = "操作失败";
+        if (i > 0) {
+            mag = "操作成功";
+        }
+        return mag;
+    }
+
+}

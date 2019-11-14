@@ -1,12 +1,12 @@
 let lay = new Vue({
-    el: '#body-content',
+    el: '#main-container',
     data: {
         appversion: {}
     },
     methods: {
         updata: function () {
             axios({
-                url: 'app/controller/updata',
+                url: 'manager/app/updata',
                 method: 'post',
                 data: this.appversion
             }).then(response => {
