@@ -50,19 +50,19 @@ let em = new Vue({
 
 
         },
-        del:function (id) {
-            layer.msg("删除否?",{
-                time:0,
-                btn: ['是','否'],
-                yes:index=> {
+        del: function (id) {
+            layer.msg("删除否?", {
+                time: 0,
+                btn: ['是', '否'],
+                yes: index => {
                     axios({
-                        url:'manager/app/del',
-                        params:{
-                            id:id
+                        url: 'manager/app/del',
+                        params: {
+                            id: id
                         }
-                    }).then(response=>{
-                       layer.close(index);
-                       layer.msg(response.data)
+                    }).then(response => {
+                        layer.close(index);
+                        layer.msg(response.data)
                         this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize)
                     }).catch(function (error) {
                         console.log(error)
@@ -71,7 +71,8 @@ let em = new Vue({
             })
 
 
-                }
+        }
+
     },
     created: function () {
 

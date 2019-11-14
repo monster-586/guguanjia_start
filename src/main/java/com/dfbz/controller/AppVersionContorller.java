@@ -8,28 +8,23 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("manager/app")
 public class AppVersionContorller {
     @Autowired
     AppVersionService appVersionService;
 
     @RequestMapping("selectAll")
-    @ResponseBody
     public PageInfo<AppVersion> selectAll(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "3") Integer pageSize) {
         PageInfo<AppVersion> pageInfo = appVersionService.selectAll(pageNum, pageSize);
         return pageInfo;
     }
 
-    @RequestMapping(value = "updata",produces = "html/text;charset=utf-8")
-    @ResponseBody
+    @RequestMapping(value = "updata", produces = "html/text;charset=utf-8")
     public String updateByPrimaryKey(@RequestBody AppVersion appVersion) {
         int i = appVersionService.updateByPrimaryKeySelective(appVersion);
         String mag = "操作失败";
@@ -40,15 +35,13 @@ public class AppVersionContorller {
     }
 
     @RequestMapping(value = "toupdata")
-    @ResponseBody
     public AppVersion toUpdate(Long id) {
         return appVersionService.selectByPrimaryKey(id);
     }
 
-    @RequestMapping(value = "del",produces = "html/text;charset=utf-8")
-    @ResponseBody
+    @RequestMapping(value = "del", produces = "html/text;charset=utf-8")
     public String deleteByPrimaryKey(Long id) {
-        int i=appVersionService.deleteByPrimaryKey(id);
+        int i = appVersionService.deleteByPrimaryKey(id);
         String mag = "操作失败";
         if (i > 0) {
             mag = "操作成功";
@@ -56,4 +49,13 @@ public class AppVersionContorller {
         return mag;
     }
 
+    @RequestMapping(value = "add", produces = "html/text;charset=utf-8")
+    public String insertSelective(AppVersion appVersion) {
+        int i = appVersionService.insertSelective(appVersion);
+        String mag = "操作失败";
+        if (i > 0) {
+            mag = "操作成功";
+        }
+        return mag;
+    }
 }
