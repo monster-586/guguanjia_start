@@ -3,14 +3,11 @@ package com.dfbz.controller;
 import com.dfbz.entity.AppVersion;
 import com.dfbz.service.AppVersionService;
 import com.github.pagehelper.PageInfo;
-import com.sun.xml.internal.ws.api.pipe.ContentType;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Date;
+
 
 @RestController
 @RequestMapping("manager/app")
@@ -41,7 +38,13 @@ public class AppVersionContorller {
 
     @RequestMapping(value = "del", produces = "html/text;charset=utf-8")
     public String deleteByPrimaryKey(Long id) {
-        int i = appVersionService.deleteByPrimaryKey(id);
+        AppVersion appVersion=new AppVersion();
+        appVersion.setId(id);
+        appVersion.setDelFlag("1");
+        Date date = new Date();
+        appVersion.setCreateDate(date);
+        System.out.println(date);
+        int i = appVersionService.updateByPrimaryKeySelective(appVersion);
         String mag = "操作失败";
         if (i > 0) {
             mag = "操作成功";
@@ -50,7 +53,12 @@ public class AppVersionContorller {
     }
 
     @RequestMapping(value = "add", produces = "html/text;charset=utf-8")
-    public String insertSelective(AppVersion appVersion) {
+    public String insertSelective(@RequestBody AppVersion appVersion) {
+        appVersion.setCreateBy("超级管理员");
+        appVersion.setDelFlag("0");
+        appVersion.setUpdateDate(new Date());
+        appVersion.setCreateDate(new Date());
+        System.out.println(appVersion);
         int i = appVersionService.insertSelective(appVersion);
         String mag = "操作失败";
         if (i > 0) {

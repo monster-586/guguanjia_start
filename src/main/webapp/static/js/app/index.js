@@ -2,7 +2,9 @@ let em = new Vue({
     el: '#main-container',
     data: {
         pageInfo: {},
-        appversion: ''
+        appversion: {},
+
+
 
     },
     methods: {
@@ -23,6 +25,7 @@ let em = new Vue({
                 console.log(error)
             })
         },
+
         toupdata: function (id) {
             axios({
                 url: 'manager/app/toupdata',
@@ -50,6 +53,7 @@ let em = new Vue({
 
 
         },
+
         del: function (id) {
             layer.msg("删除否?", {
                 time: 0,
@@ -71,6 +75,19 @@ let em = new Vue({
             })
 
 
+        },
+
+        add: function () {
+            axios({
+                url: 'manager/app/add',
+                method: 'post',
+                data: this.appversion
+            }).then(response => {
+                    layer.msg(response.data)
+                }
+            ).catch(function (error) {
+                console.log(error)
+            })
         }
 
     },
