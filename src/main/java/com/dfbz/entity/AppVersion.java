@@ -43,6 +43,7 @@ public class AppVersion {
     /**
      * 数据创建时间,在数据新增时设置
      */
+
     @JsonFormat(pattern = "yyyy/MM/dd hh:mm:ss")
     @Column(name = "create_date")
     private Date createDate;

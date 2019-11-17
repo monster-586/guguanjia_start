@@ -1,14 +1,21 @@
 let lay = new Vue({
     el: '#main-container',
     data: {
-        appversion: {}
+        qualification: {
+
+        }
+
+
     },
     methods: {
-        updata: function () {
+        updateCheck: function (check) {
+            this.qualification.check=check;
+
+            console.log(this.qualification)
             axios({
-                url: 'manager/app/index/updata',
+                url: 'manager/qualification/index/updateCheck',
                 method: 'post',
-                data: this.appversion
+                data:this.qualification
             }).then(response => {
                 parent.layer.msg(response.data)
                 let index = parent.layer.getFrameIndex(window.name);
@@ -17,14 +24,12 @@ let lay = new Vue({
                 console.log(error)
             });
         },
-        cancle:function () {
-            let index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
-        }
+
 
     },
     created:function (){
-        this.appversion=parent.layer.appversion;
+        this.qualification=parent.layer.qualification;
+        // console.log(this.qualification)
     }
 
 

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.mapper.session.Configuration;
@@ -20,6 +21,7 @@ import java.util.Properties;
 @MapperScan(basePackages = "com.dfbz.dao")
 @ComponentScan(basePackages = "com.dfbz.service")
 @EnableTransactionManagement
+@PropertySource(value = "classpath:sys.properties",encoding = "utf-8")
 public class SpringMybatis {
 
     @Bean
@@ -49,6 +51,8 @@ public class SpringMybatis {
         //设置驼峰命名转换
         Configuration configuration = new Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
+
+        configuration.setCallSettersOnNulls(true);
         factoryBean.setConfiguration(configuration);
 
 

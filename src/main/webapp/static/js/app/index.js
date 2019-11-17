@@ -10,7 +10,7 @@ let em = new Vue({
     methods: {
         selectAll: function (pageNum, pageSize) {
             axios({
-                url: "manager/app/selectAll",
+                url: "manager/app/index/selectAll",
                 // method:"get",
                 params: {
                     pageNum: pageNum,
@@ -28,7 +28,7 @@ let em = new Vue({
 
         toupdata: function (id) {
             axios({
-                url: 'manager/app/toupdata',
+                url: 'manager/app/index/toupdata',
                 params: {
                     id: id
                 }
@@ -60,7 +60,7 @@ let em = new Vue({
                 btn: ['是', '否'],
                 yes: index => {
                     axios({
-                        url: 'manager/app/del',
+                        url: 'manager/app/index/del',
                         params: {
                             id: id
                         }
@@ -79,7 +79,7 @@ let em = new Vue({
 
         add: function () {
             axios({
-                url: 'manager/app/add',
+                url: 'manager/app/index/add',
                 method: 'post',
                 data: this.appversion
             }).then(response => {
