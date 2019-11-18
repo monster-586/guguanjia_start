@@ -36,6 +36,7 @@ public class qualificationContrloller {
         Integer i = 0;
         if (qualification.getCheck() == 1) {
             qual.setCheck(1);
+            qual.setDescription(qualification.getDescription());
             i = quaService.updateByPrimaryKeySelective(qual);
             if (i > 0) {
                 return "资质改为通过审核";
@@ -45,6 +46,7 @@ public class qualificationContrloller {
 
         } else {
             qual.setCheck(2);
+            qual.setDescription(qualification.getDescription());
             i = quaService.updateByPrimaryKeySelective(qual);
             if (i > 0) {
                 return "资质改为通过审核";

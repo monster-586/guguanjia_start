@@ -87,11 +87,13 @@
                         </div>
                     </div>
                     <div class="width-100 clearfix tag-save-btn"  >
-                        <span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" action="examine" id="leftButton" @click="updateCheck(1)" :class="qualification.check==1?'hidden':''">
+                        <span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" action="examine" id="leftButton" @click="updateCheck(1)" >
+                            <!--:class="qualification.check==1?'hidden':''"-->
                             <i class="ace-icon fa fa-floppy-o align-top bigger-125"></i>
                             <span id="leftButtonText">通过</span>
                         </span>
-                        <span class="btn btn-yellow btn-sm bigger-110 width-50 pull-right" action="unexamine" id="rightButton" @click="updateCheck(2)" :class="qualification.check!=1?'hidden':''">
+                        <span class="btn btn-yellow btn-sm bigger-110 width-50 pull-right" action="unexamine" id="rightButton" @click="updateCheck(2)" >
+                            <!--:class="qualification.check!=1?'hidden':''"-->
                             <i class="ace-icon fa fa-times align-top  bigger-125"></i>不通过
                         </span>
                     </div>
@@ -135,7 +137,7 @@
 <script type="text/javascript" src="static/js/public.js"></script>
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
-<script type="text/javascript" src="static/qualification/update.js"></script>
+<script type="text/javascript" src="static/js/qualification/update.js"></script>
 
 </body>
 </html>
