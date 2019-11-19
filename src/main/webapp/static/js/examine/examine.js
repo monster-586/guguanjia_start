@@ -7,14 +7,16 @@ let em = new Vue({
                 pageNum: '',
                 pageSize: ''
             },
-            name: '',
+
             map: {
                 pageNum: '',
                 pageSize: '',
-                officeName:'' ,
+                name: '',
                 type: '',
                 uName: ''
             },
+
+
 
             setting: {
                 data: {
@@ -40,7 +42,8 @@ let em = new Vue({
         selectByCondition: function (pageNum, pageSize) {
             this.map.pageNum = pageNum;
             this.map.pageSize = pageSize;
-            console.log(map)
+            console.log(this.map)
+            // console.log(this.pageInfo)
 
             axios({
                 url: "manager/examine/index/selectByCondition",
@@ -61,6 +64,7 @@ let em = new Vue({
                 params: ''
             }).then(response => {
                 this.nodes = response.data;
+                // console.log(response.data)
                 let treeObject = $.fn.zTree.init($("#pullDownTreeone"), this.setting, this.nodes);
                 treeObject.expandAll(true);//展开所有节点
                 this.treeObj = treeObject;//给vue传值
@@ -72,14 +76,14 @@ let em = new Vue({
         },
 
         Click: function (event, treeId, treeNode) {
-            this.name = treeNode.name;
+            this.map.name = treeNode.name;
 
         },
         showTree: function (flag) {
 
         },
         search: function () {
-            let node = this.treeObj.getNodesByParamFuzzy("name", this.name, null)
+            let node = this.treeObj.getNodesByParamFuzzy("map.name", this.map.name, null)
 
             let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
             // let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
@@ -91,7 +95,7 @@ let em = new Vue({
 
             for (let index in nodeArr) {
                 for (let nodeIndex in node) {
-                    if (nodeArr[index].id == nodes[nodeIndex].id) {
+                    if (nodeArr[index].id == node[nodeIndex].id) {
                         nodeArr[index].higtLine = true;//设置高亮标记
                         //更新节点  会触发自动的设置css等回调
                         this.treeObj.updateNode(nodeArr[index])
