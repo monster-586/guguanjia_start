@@ -124,7 +124,7 @@
 	                                                                        </span>
 
                                                                         <div class="dropdown-menu dropdown-caret scrollable width-100"
-                                                                             data-height="250">
+                                                                             data-height="250"  @mouseleave="searchClear" @mouseenter="search">
                                                                             <div class="padding-15">
                                                                                 <div style="padding-bottom: 10px;">
                                                                                     <input type="text"
@@ -132,7 +132,7 @@
                                                                                            placeholder="搜索"
                                                                                            v-model="name"
                                                                                            class="width-100"
-                                                                                           @mouseleave="searchClear"
+
                                                                                            @keydown.enter="search"/>
                                                                                 </div>
                                                                                 <ul class="ztree"
