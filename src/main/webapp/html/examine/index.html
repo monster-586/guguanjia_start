@@ -117,8 +117,10 @@
                                                                     <label class="inline">所属机构：</label>
 
                                                                     <div class="btn-group width-80">
-	                                                                        <span data-toggle="dropdown" class="btn btn-primary btn-white dropdown-toggle width-100">
-		                                                                            <span id="pullDownTreeCurNameone">{{map.name==''?'全部':map.name}}</span> <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+	                                                                        <span data-toggle="dropdown"
+                                                                                  class="btn btn-primary btn-white dropdown-toggle width-100">
+		                                                                            <span id="pullDownTreeCurNameone">{{name==''?'全部':name}}</span> <i
+                                                                                    class="ace-icon fa fa-angle-down icon-on-right"></i>
 	                                                                        </span>
 
                                                                         <div class="dropdown-menu dropdown-caret scrollable width-100"
@@ -128,29 +130,36 @@
                                                                                     <input type="text"
                                                                                            id="pullDownTreeSearchone"
                                                                                            placeholder="搜索"
-                                                                                           class="width-100" @keydown.enter="search"/>
+                                                                                           v-model="name"
+                                                                                           class="width-100"
+                                                                                           @mouseleave="searchClear"
+                                                                                           @keydown.enter="search"/>
                                                                                 </div>
-                                                                                <ul class="ztree" id="pullDownTreeone"></ul>
+                                                                                <ul class="ztree"
+                                                                                    id="pullDownTreeone"></ul>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="hidden" name="companyId" value="0"  id="pullDownTreeCurIdone"/>
+                                                                    <input type="hidden" name="companyId" value="0"
+                                                                           id="pullDownTreeCurIdone"/>
                                                                     <!--<input type="hidden" name="" value=""-->
-                                                                           <!--id="pullDownTreeCurPidone"/>-->
+                                                                    <!--id="pullDownTreeCurPidone"/>-->
                                                                     <!--<input type="hidden" name="officeType" value=""-->
-                                                                           <!--id="pullDownTreeCurCidone"/>-->
+                                                                    <!--id="pullDownTreeCurCidone"/>-->
 
 
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <label class="inline">真实姓名：</label>
-                                                                    <input type="text" class="width-80" v-model="map.uName" name="uName"/>
+                                                                    <input type="text" class="width-80"
+                                                                           v-model="map.uName" name="uName"/>
                                                                 </div>
                                                             </div>
                                                             <div class="row padding-tb-10">
                                                                 <div class="col-sm-6">
                                                                     <label class="inline">考核类型：</label>
-                                                                    <select name="type" class="width-80" v-model="map.type">
+                                                                    <select name="type" class="width-80"
+                                                                            v-model="map.type">
                                                                         <option value="">请选择考核类型</option>
                                                                         <option value="1">产废方</option>
                                                                         <option value="2">处置方</option>
@@ -158,8 +167,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="padding-trb-10 col-sm-12">
-                                                                <span class="btn  btn-primary btn-sm col-sm-6" @click="selectByCondition">全 部 查询</span>
-                                                                <span class="btn btn-info btn-sm col-sm-6" id="search-btn" @click="selectByCondition">条 件 查 询</span>
+                                                                <span class="btn  btn-primary btn-sm col-sm-6"
+                                                                      @click="selectByCondition(pageInfo.pageNum,pageInfo.pageSize)" >全 部 查询</span>
+                                                                <span class="btn btn-info btn-sm col-sm-6"
+                                                                      id="search-btn"
+                                                                      @click="selectByCondition(pageInfo.pageNum,pageInfo.pageSize)" @mouseenter="search">条 件 查 询</span>
                                                             </div>
                                                         </form>
 
@@ -219,44 +231,49 @@
                             </div>
                             <div>
                                 <div class="pagination no-margin pull-right clearfix">
-                                    <li ><a  @Click="selectByCondition(1,pageInfo.pageSize)">首页</a>
+                                    <li><a @Click="selectByCondition(1,pageInfo.pageSize)">首页</a>
                                     </li>
-                                    <li class="active"><a  @Click="selectByCondition(pageInfo.prePage,pageInfo.pageSize)" :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
+                                    <li class="active"><a @Click="selectByCondition(pageInfo.prePage,pageInfo.pageSize)"
+                                                          :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
                                     </li>
-                                    <li class=""><a @Click="selectByCondition(pageInfo.pageNum,pageInfo.pageSize)" v-for="pag in pageInfo.navigatepageNums">{{pag}}</a>
+                                    <li :class="num==pageInfo.pageNum?'active':''"
+                                        v-for="num in pageInfo.navigatepageNums"><a
+                                            @click="selectByCondition(num,pageInfo.pageSize)">{{num}}</a>
                                     </li>
-                                    <li class="active"><a @Click="selectByCondition(pageInfo.nextPage,pageInfo.pageSize)" :class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
+                                    <li class="active"><a
+                                            @Click="selectByCondition(pageInfo.nextPage,pageInfo.pageSize)"
+                                            :class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
                                     </li>
-                                    <li ><a  @Click="selectByCondition(pageInfo.pages,pageInfo.pageSize)">尾页</a>
+                                    <li><a @Click="selectByCondition(pageInfo.pages,pageInfo.pageSize)">尾页</a>
                                     </li>
                                 </div>
 
                             </div>
                             <!--<div>-->
-                                <!--<div class="pagination no-margin pull-right clearfix">-->
-                                    <!--<li class="prev disabled"><a href="javascript:void(0);"-->
-                                                                 <!--onclick="return false;">首页</a></li>-->
-                                    <!--<li class="prev disabled"><a href="javascript:void(0);"-->
-                                                                 <!--onclick="return false;">上一页</a></li>-->
-                                    <!--<li class="active"><a href="javascript:void(0);" onclick="return false;">1</a></li>-->
-                                    <!--<li><a href="javascript:void(0);"-->
-                                           <!--onclick="paging('search-form',2);return false;">2</a></li>-->
-                                    <!--<li><a href="javascript:void(0);"-->
-                                           <!--onclick="paging('search-form',3);return false;">3</a></li>-->
-                                    <!--<li><a href="javascript:void(0);" onclick="paging('search-form',2);return false;">下一页</a>-->
-                                    <!--</li>-->
-                                    <!--<li><a href="javascript:void(0);"-->
-                                           <!--onclick="paging('search-form',3);return false;">尾页</a></li>-->
-                                <!--</div>-->
+                            <!--<div class="pagination no-margin pull-right clearfix">-->
+                            <!--<li class="prev disabled"><a href="javascript:void(0);"-->
+                            <!--onclick="return false;">首页</a></li>-->
+                            <!--<li class="prev disabled"><a href="javascript:void(0);"-->
+                            <!--onclick="return false;">上一页</a></li>-->
+                            <!--<li class="active"><a href="javascript:void(0);" onclick="return false;">1</a></li>-->
+                            <!--<li><a href="javascript:void(0);"-->
+                            <!--onclick="paging('search-form',2);return false;">2</a></li>-->
+                            <!--<li><a href="javascript:void(0);"-->
+                            <!--onclick="paging('search-form',3);return false;">3</a></li>-->
+                            <!--<li><a href="javascript:void(0);" onclick="paging('search-form',2);return false;">下一页</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="javascript:void(0);"-->
+                            <!--onclick="paging('search-form',3);return false;">尾页</a></li>-->
+                            <!--</div>-->
 
                             <!--</div>-->
                         </div>
 
                         <!--<style>-->
-                            <!--#profile .center > label {-->
-                                <!--width: 100px;-->
-                                <!--text-align: right;-->
-                            <!--}-->
+                        <!--#profile .center > label {-->
+                        <!--width: 100px;-->
+                        <!--text-align: right;-->
+                        <!--}-->
                         <!--</style>-->
 
 

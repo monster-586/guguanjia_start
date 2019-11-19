@@ -11,12 +11,12 @@ let em = new Vue({
             map: {
                 pageNum: '',
                 pageSize: '',
-                name: '',
+                officeName: '',
                 type: '',
                 uName: ''
             },
 
-
+            name: '',
 
             setting: {
                 data: {
@@ -76,22 +76,32 @@ let em = new Vue({
         },
 
         Click: function (event, treeId, treeNode) {
-            this.map.name = treeNode.name;
+            this.name = treeNode.name;
+
 
         },
         showTree: function (flag) {
 
         },
-        search: function () {
-            let node = this.treeObj.getNodesByParamFuzzy("map.name", this.map.name, null)
+        searchClear: function () {
+            console.log("aaaa");
 
             let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
-            // let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
 
             for (let index in nodeArr) {
                 nodeArr[index].higtLine = false;
                 this.treeObj.updateNode(nodeArr[index]);//更新节点，自动调用清除css
             }
+        }
+        ,
+        search: function () {
+
+            console.log("bbbb")
+            let node = this.treeObj.getNodesByParamFuzzy("name", this.name, null)
+
+            let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
+            // let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
+
 
             for (let index in nodeArr) {
                 for (let nodeIndex in node) {
@@ -99,6 +109,7 @@ let em = new Vue({
                         nodeArr[index].higtLine = true;//设置高亮标记
                         //更新节点  会触发自动的设置css等回调
                         this.treeObj.updateNode(nodeArr[index])
+                        this.map.officeName = this.name;
                     }
                 }
             }
@@ -112,9 +123,11 @@ let em = new Vue({
     created: function () {
         this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize);
 
+
     },
     mounted: function () {
         this.initTree();
+
     }
 
 })
