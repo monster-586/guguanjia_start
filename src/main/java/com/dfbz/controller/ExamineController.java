@@ -24,6 +24,7 @@ public class ExamineController {
     public PageInfo<Examine> selectByCondition(@RequestBody Map<String, Object> map) {
 
         PageInfo<Examine> examinePageInfo = exaService.selectByCondition(map);
+        System.out.println(examinePageInfo);
         return examinePageInfo;
     }
 

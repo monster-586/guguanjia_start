@@ -1,5 +1,7 @@
 package com.dfbz.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -31,6 +33,7 @@ public class Examine {
      * 数据创建时间,在数据新增时设置
      */
     @Column(name = "create_date")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
 
     /**

@@ -1,7 +1,9 @@
 import com.dfbz.config.SpringMybatis;
-import com.dfbz.dao.QualificationMapper;
+import com.dfbz.dao.ExamineMapper;
+import com.dfbz.entity.Examine;
 import com.dfbz.entity.Qualification;
 import com.dfbz.service.AppVersionService;
+import com.dfbz.service.ExamineService;
 import com.dfbz.service.QualificationService;
 import com.github.pagehelper.PageInfo;
 import org.junit.runner.RunWith;
@@ -24,6 +26,10 @@ public class Test {
     QualificationService qualificationService;
     @Autowired
     AppVersionService appVersionService;
+    @Autowired
+    ExamineMapper examineMapper;
+    @Autowired
+    ExamineService examineService;
 
     @org.junit.Test
     public void test() {
@@ -60,6 +66,26 @@ public class Test {
         map.put("endDate","2019-12-23");
         PageInfo<Qualification> pageInfo = qualificationService.selsctByorder(map);
         System.out.println(pageInfo.toString());
+    }
+    @org.junit.Test
+    public  void TestExaMapper(){
+        HashMap<String, Object> examine = new HashMap<>();
+        examine.put("officeId",56);
+        List<Examine> examines = examineMapper.selectByCondition(examine);
+        for (Examine examine1 : examines) {
+            System.out.println(examine1);
+        }
+    }
+    @org.junit.Test
+    public void TestExaservice(){
+        HashMap<String, Object> examine = new HashMap<>();
+        examine.put("officeId",56);
+        PageInfo<Examine> examinePageInfo = examineService.selectByCondition(examine);
+        List<Examine> list = examinePageInfo.getList();
+        for (Examine examine1 : list) {
+            System.out.println(examine1);
+
+        }
     }
 
 }
