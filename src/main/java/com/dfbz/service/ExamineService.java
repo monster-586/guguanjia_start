@@ -12,4 +12,5 @@ public interface ExamineService extends tservice<Examine> {
 
     PageInfo<Examine> selectByCondition(Map<String, Object> map);
 
+
 }

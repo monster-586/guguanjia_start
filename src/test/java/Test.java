@@ -2,9 +2,11 @@ import com.dfbz.config.SpringMybatis;
 import com.dfbz.dao.ExamineMapper;
 import com.dfbz.entity.Examine;
 import com.dfbz.entity.Qualification;
+import com.dfbz.entity.WorkOrder;
 import com.dfbz.service.AppVersionService;
 import com.dfbz.service.ExamineService;
 import com.dfbz.service.QualificationService;
+import com.dfbz.service.WorkOrderService;
 import com.github.pagehelper.PageInfo;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class Test {
     @Autowired
     ExamineService examineService;
 
+    @Autowired
+    WorkOrderService worService;
     @org.junit.Test
     public void test() {
         List<Qualification> qualifications = qualificationService.selectAll();
@@ -84,6 +88,17 @@ public class Test {
         List<Examine> list = examinePageInfo.getList();
         for (Examine examine1 : list) {
             System.out.println(examine1);
+
+        }
+    }
+    @org.junit.Test
+    public void TestWorkservice(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("officeName","");
+        PageInfo<WorkOrder> examinePageInfo = worService.selectByCondition(map);
+        List<WorkOrder> list = examinePageInfo.getList();
+        for (WorkOrder workOrder : list) {
+            System.out.println(workOrder);
 
         }
     }

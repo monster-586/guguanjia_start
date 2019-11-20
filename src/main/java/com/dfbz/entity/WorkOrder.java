@@ -8,26 +8,78 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Date;
 
-@Table(name = "examine")
-public class Examine {
+@Table(name = "work_order")
+public class WorkOrder {
     @Id
     private Long id;
 
-    @Column(name = "examine_user_id")
-    private Long examineUserId;
+    private String code;
 
-    private Integer score;
+    @Column(name = "create_user_id")
+    private Long createUserId;
+
+    @Column(name = "transport_user_id")
+    private Long transportUserId;
+
+    @Column(name = "recipient_user_id")
+    private Long recipientUserId;
 
     /**
-     * 每一道题的分别得分详情            {'1':2;'2':1}
+     * 0：待运输            1：运输中            2：验收
      */
-    @Column(name = "score_info")
-    private String scoreInfo;
+    private Integer status;
 
-    /**
-     * 1、我是产废方            2、我是处置方
-     */
-    private Integer type;
+    @Transient
+    private String createName;
+    @Transient
+    private String createOffice;
+    @Transient
+    private String transportName;
+    @Transient
+    private String recipientName;
+    @Transient
+    private String phone;
+
+
+    public String getCreateOffice() {
+        return createOffice;
+    }
+
+    public void setCreateOffice(String createOffice) {
+        this.createOffice = createOffice;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getTransportName() {
+        return transportName;
+    }
+
+    public void setTransportName(String transportName) {
+        this.transportName = transportName;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     /**
      * 数据创建时间,在数据新增时设置
@@ -40,6 +92,7 @@ public class Examine {
      * 数据修改时间,在数据新增时和修改时设置
      */
     @Column(name = "update_date")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateDate;
 
     /**
@@ -50,38 +103,6 @@ public class Examine {
 
     @Column(name = "create_by")
     private String createBy;
-
-//    @Transient
-//    private String name;
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-    @Transient
-    private String oName;
-    @Transient
-    private String uName;
-
-
-    public String getoName() {
-        return oName;
-    }
-
-    public void setoName(String oName) {
-        this.oName = oName;
-    }
-
-    public String getuName() {
-        return uName;
-    }
-
-    public void setuName(String uName) {
-        this.uName = uName;
-    }
 
     /**
      * @return id
@@ -98,67 +119,77 @@ public class Examine {
     }
 
     /**
-     * @return examine_user_id
+     * @return code
      */
-    public Long getExamineUserId() {
-        return examineUserId;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * @param examineUserId
+     * @param code
      */
-    public void setExamineUserId(Long examineUserId) {
-        this.examineUserId = examineUserId;
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
     /**
-     * @return score
+     * @return create_user_id
      */
-    public Integer getScore() {
-        return score;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
     /**
-     * @param score
+     * @param createUserId
      */
-    public void setScore(Integer score) {
-        this.score = score;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     /**
-     * 获取每一道题的分别得分详情            {'1':2;'2':1}
+     * @return transport_user_id
+     */
+    public Long getTransportUserId() {
+        return transportUserId;
+    }
+
+    /**
+     * @param transportUserId
+     */
+    public void setTransportUserId(Long transportUserId) {
+        this.transportUserId = transportUserId;
+    }
+
+    /**
+     * @return recipient_user_id
+     */
+    public Long getRecipientUserId() {
+        return recipientUserId;
+    }
+
+    /**
+     * @param recipientUserId
+     */
+    public void setRecipientUserId(Long recipientUserId) {
+        this.recipientUserId = recipientUserId;
+    }
+
+    /**
+     * 获取0：待运输            1：运输中            2：验收
      *
-     * @return score_info - 每一道题的分别得分详情            {'1':2;'2':1}
+     * @return status - 0：待运输            1：运输中            2：验收
      */
-    public String getScoreInfo() {
-        return scoreInfo;
+    public Integer getStatus() {
+        return status;
     }
 
     /**
-     * 设置每一道题的分别得分详情            {'1':2;'2':1}
+     * 设置0：待运输            1：运输中            2：验收
      *
-     * @param scoreInfo 每一道题的分别得分详情            {'1':2;'2':1}
+     * @param status 0：待运输            1：运输中            2：验收
      */
-    public void setScoreInfo(String scoreInfo) {
-        this.scoreInfo = scoreInfo == null ? null : scoreInfo.trim();
-    }
-
-    /**
-     * 获取1、我是产废方            2、我是处置方
-     *
-     * @return type - 1、我是产废方            2、我是处置方
-     */
-    public Integer getType() {
-        return type;
-    }
-
-    /**
-     * 设置1、我是产废方            2、我是处置方
-     *
-     * @param type 1、我是产废方            2、我是处置方
-     */
-    public void setType(Integer type) {
-        this.type = type;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**
@@ -231,12 +262,13 @@ public class Examine {
 
     @Override
     public String toString() {
-        return "Examine{" +
+        return "WorkOrder{" +
                 "id=" + id +
-                ", examineUserId=" + examineUserId +
-                ", score=" + score +
-                ", scoreInfo='" + scoreInfo + '\'' +
-                ", type=" + type +
+                ", code='" + code + '\'' +
+                ", createUserId=" + createUserId +
+                ", transportUserId=" + transportUserId +
+                ", recipientUserId=" + recipientUserId +
+                ", status=" + status +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 ", delFlag='" + delFlag + '\'' +

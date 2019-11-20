@@ -117,14 +117,14 @@
                                                                     <label class="inline">所属机构：</label>
 
                                                                     <div class="btn-group width-80">
-	                                                                        <span data-toggle="dropdown"
+                                                                        <span data-toggle="dropdown"
                                                                                   class="btn btn-primary btn-white dropdown-toggle width-100">
-		                                                                            <span id="pullDownTreeCurNameone">{{name==''?'全部':name}}</span> <i
-                                                                                    class="ace-icon fa fa-angle-down icon-on-right"></i>
-	                                                                        </span>
+		                                                                            <span id="pullDownTreeCurNameone">{{name==''?'全部':name}}</span>
+                                                                            <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                                                                        </span>
 
                                                                         <div class="dropdown-menu dropdown-caret scrollable width-100"
-                                                                             data-height="250"  @mouseleave="searchClear" @mouseenter="search">
+                                                                             data-height="250"  @mouseleave="searchClear">
                                                                             <div class="padding-15">
                                                                                 <div style="padding-bottom: 10px;">
                                                                                     <input type="text"
@@ -168,10 +168,10 @@
                                                             </div>
                                                             <div class="padding-trb-10 col-sm-12">
                                                                 <span class="btn  btn-primary btn-sm col-sm-6"
-                                                                      @click="selectByCondition(pageInfo.pageNum,pageInfo.pageSize)" >全 部 查询</span>
+                                                                      @click="selectByCondition(1,pageInfo.pageSize)" >全 部 查询</span>
                                                                 <span class="btn btn-info btn-sm col-sm-6"
                                                                       id="search-btn"
-                                                                      @click="selectByCondition(pageInfo.pageNum,pageInfo.pageSize)" @mouseenter="search">条 件 查 询</span>
+                                                                      @click="selectByCondition(1,pageInfo.pageSize)" @mouseenter="search">条 件 查 询</span>
                                                             </div>
                                                         </form>
 
@@ -317,26 +317,26 @@
 
     });
 
-    try {
-        ace.settings.check('main-container', 'fixed')
-    } catch (e) {
-    }
-    try {
-        ace.settings.check('navbar', 'fixed')
-    } catch (e) {
-    }
-    try {
-        ace.settings.check('sidebar', 'fixed')
-    } catch (e) {
-    }
-    try {
-        ace.settings.check('sidebar', 'collapsed')
-    } catch (e) {
-    }
-    try {
-        ace.settings.check('breadcrumbs', 'fixed')
-    } catch (e) {
-    }
+    // try {
+    //     ace.settings.check('main-container', 'fixed')
+    // } catch (e) {
+    // }
+    // try {
+    //     ace.settings.check('navbar', 'fixed')
+    // } catch (e) {
+    // }
+    // try {
+    //     ace.settings.check('sidebar', 'fixed')
+    // } catch (e) {
+    // }
+    // try {
+    //     ace.settings.check('sidebar', 'collapsed')
+    // } catch (e) {
+    // }
+    // try {
+    //     ace.settings.check('breadcrumbs', 'fixed')
+    // } catch (e) {
+    // }
 
 </script>
 <script>

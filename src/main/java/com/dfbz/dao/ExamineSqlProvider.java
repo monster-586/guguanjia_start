@@ -24,7 +24,7 @@ public class ExamineSqlProvider {
         if(!StringUtils.isEmpty(map.get("type"))){
             sb.append(" and ex.type=#{type} ");
         }
-        System.out.println(sb.toString());
+
         return sb.toString();
     }
 }
