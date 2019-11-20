@@ -22,7 +22,7 @@ public class WorkOrderSqlProvider {
             sb.append(" and wo.status=#{status}");
         }
         if (!StringUtils.isEmpty(map.get("officeName"))) {
-            sb.append(" and su.name like concat('%','#{officeName}','%')");
+            sb.append(" and su.name like concat('%',#{officeName},'%')");
         }
         if (!StringUtils.isEmpty(map.get("startDate"))) {
             sb.append(" and wo.create_date>#{startDate}");

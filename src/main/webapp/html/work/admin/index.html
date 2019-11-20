@@ -217,26 +217,28 @@
 							<div style="float: left;">
 								<div style="padding-top:5px;">
 			<span class="badge badge-info">
-				当前第 1 页 / 28 页，共 278 条数据
+				  当前第{{pageInfo.pageNum}} 页 / {{pageInfo.pages}} 页，共 {{pageInfo.total}} 条数据
 			</span>
 								</div>
 							</div>
 							<div>
 
 								<div class="pagination no-margin pull-right clearfix">
-									<li class="prev disabled"><a href="javascript:void(0);" onclick="">首页</a></li>
-									<li class="prev disabled"><a href="javascript:void(0);" onclick="">上一页</a></li>
-									<li class="active"><a href="javascript:void(0);" onclick="">1</a></li>
-									<li><a href="javascript:void(0);" onclick="">2</a></li>
-									<li><a href="javascript:void(0);" onclick="">3</a></li>
-									<li><a href="javascript:void(0);" onclick="">4</a></li>
-									<li><a href="javascript:void(0);" onclick="">5</a></li>
-									<li><a href="javascript:void(0);" onclick="">6</a></li>
-									<li><a href="javascript:void(0);" onclick="">7</a></li>
-									<li><a href="javascript:void(0);">…</a></li>
-
-									<li><a href="javascript:void(0);" onclick="">下一页</a></li>
-									<li><a href="javascript:void(0);" onclick="">尾页</a></li>
+									<li><a @Click="selectByCondition(1,pageInfo.pageSize)">首页</a>
+									</li>
+									<li class="active"><a @Click="selectByCondition(pageInfo.prePage,pageInfo.pageSize)"
+														  :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
+									</li>
+									<li :class="num==pageInfo.pageNum?'active':''"
+										v-for="num in pageInfo.navigatepageNums"><a
+											@click="selectByCondition(num,pageInfo.pageSize)">{{num}}</a>
+									</li>
+									<li class="active"><a
+											@Click="selectByCondition(pageInfo.nextPage,pageInfo.pageSize)"
+											:class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
+									</li>
+									<li><a @Click="selectByCondition(pageInfo.pages,pageInfo.pageSize)">尾页</a>
+									</li>
 								</div>
 							</div>
 						</div>

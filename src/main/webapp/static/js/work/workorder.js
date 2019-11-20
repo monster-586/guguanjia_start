@@ -87,8 +87,8 @@ let em = new Vue({
             console.log("bbbb")
             let checkNodes = this.treeObj.getNodesByParamFuzzy("name", this.name, null);
             let nodesAll = this.treeObj.transformToArray(this.treeObj.getNodes());
-            this.map.officeName = this.name;
             for (let index in nodesAll) {
+            this.map.officeName = this.name;
                 for (let checkIndex in checkNodes) {
                     if (checkNodes[checkIndex].id == nodesAll[index].id) {
                         nodesAll[index].higtLine = true;
