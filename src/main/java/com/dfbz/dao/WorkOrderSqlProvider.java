@@ -17,7 +17,8 @@ public class WorkOrderSqlProvider {
                 " on wo.create_user_id=su.id  " +
                 " left join sys_office so " +
                 " on su.office_id=so.id " +
-                " where wo.del_flag=0" );
+                " where wo.del_flag=0");
+
         if (!StringUtils.isEmpty(map.get("status"))) {
             sb.append(" and wo.status=#{status}");
         }
@@ -30,6 +31,9 @@ public class WorkOrderSqlProvider {
         if (!StringUtils.isEmpty(map.get("endDate"))) {
             sb.append(" and wo.create_date<#{endDate}");
         }
+//        if (!StringUtils.isEmpty(map.get("code"))) {
+//            sb.append(" and wo.create_date<#{code}");
+//        }
 
         return sb.toString();
 

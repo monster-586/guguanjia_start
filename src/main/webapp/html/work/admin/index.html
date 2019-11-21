@@ -186,7 +186,7 @@
 							<tr v-for="wor in pageInfo.list">
 								<td class="center">
 									<a title="点击查看工单详情"
-									   @click="detail"
+									   @click="detail(wor.id)"
 									   data-title="wor.code详情" data-mode="detail"
 									   data-url="" data-width="60%"
 									   data-data="{id:'137'}"

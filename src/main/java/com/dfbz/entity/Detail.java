@@ -3,6 +3,7 @@ package com.dfbz.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "detail")
@@ -50,6 +51,38 @@ public class Detail {
 
     @Column(name = "create_by")
     private String createBy;
+
+
+    @Transient
+    private Long detailCode;
+    @Transient
+    private String detailNa;
+    @Transient
+    private String detailMe;
+
+    public Long getDetailCode() {
+        return detailCode;
+    }
+
+    public void setDetailCode(Long detailCode) {
+        this.detailCode = detailCode;
+    }
+
+    public String getDetailNa() {
+        return detailNa;
+    }
+
+    public void setDetailNa(String detailNa) {
+        this.detailNa = detailNa;
+    }
+
+    public String getDetailMe() {
+        return detailMe;
+    }
+
+    public void setDetailMe(String detailMe) {
+        this.detailMe = detailMe;
+    }
 
     /**
      * @return id
@@ -243,5 +276,25 @@ public class Detail {
      */
     public void setCreateBy(String createBy) {
         this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "id=" + id +
+                ", workOrderId=" + workOrderId +
+                ", wasteTypeId=" + wasteTypeId +
+                ", wasteId=" + wasteId +
+                ", component='" + component + '\'' +
+                ", weight=" + weight +
+                ", morphological='" + morphological + '\'' +
+                ", packaging='" + packaging + '\'' +
+                ", plateNumber='" + plateNumber + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", delFlag='" + delFlag + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", detailCode=" + detailCode +
+                '}';
     }
 }

@@ -1,12 +1,7 @@
 import com.dfbz.config.SpringMybatis;
 import com.dfbz.dao.ExamineMapper;
-import com.dfbz.entity.Examine;
-import com.dfbz.entity.Qualification;
-import com.dfbz.entity.WorkOrder;
-import com.dfbz.service.AppVersionService;
-import com.dfbz.service.ExamineService;
-import com.dfbz.service.QualificationService;
-import com.dfbz.service.WorkOrderService;
+import com.dfbz.entity.*;
+import com.dfbz.service.*;
 import com.github.pagehelper.PageInfo;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,5 +97,26 @@ public class Test {
 
         }
     }
+    @org.junit.Test
+    public void TestworkOneCondition(){
+        WorkOrder workOrder = worService.selectOneByCondition(1);
+        System.out.println(workOrder.getDetail());
+        System.out.println(workOrder.getTransfer());
+    }
+    @Autowired
+    DetailService detailService;
+    @org.junit.Test
+    public void TestdetailOneCondition(){
+        List<Detail> details = detailService.selectOneByCondition(1);
+        System.out.println(details);
+    }
 
+
+    @Autowired
+   TransferService transferService;
+    @org.junit.Test
+    public void TesttransfOneCondition(){
+        List<Transfer> transfers = transferService.selectOneByCondition(1);
+        System.out.println(transfers);
+    }
 }

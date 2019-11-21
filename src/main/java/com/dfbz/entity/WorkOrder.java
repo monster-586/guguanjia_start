@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "work_order")
 public class WorkOrder {
@@ -39,7 +40,26 @@ public class WorkOrder {
     private String recipientName;
     @Transient
     private String phone;
+    @Transient
+    private List<Detail> detail;
+    @Transient
+    private List<Transfer> transfer;
 
+    public List<Detail> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(List<Detail> detail) {
+        this.detail = detail;
+    }
+
+    public List<Transfer> getTransfer() {
+        return transfer;
+    }
+
+    public void setTransfer(List<Transfer> transfer) {
+        this.transfer = transfer;
+    }
 
     public String getCreateOffice() {
         return createOffice;

@@ -3,6 +3,7 @@ package com.dfbz.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "transfer")
@@ -41,6 +42,30 @@ public class Transfer {
 
     @Column(name = "create_by")
     private String createBy;
+
+
+
+    @Transient
+    private String oprateName;
+    @Transient
+    private String opratePhone;
+
+
+    public String getOprateName() {
+        return oprateName;
+    }
+
+    public void setOprateName(String oprateName) {
+        this.oprateName = oprateName;
+    }
+
+    public String getOpratePhone() {
+        return opratePhone;
+    }
+
+    public void setOpratePhone(String opratePhone) {
+        this.opratePhone = opratePhone;
+    }
 
     /**
      * @return id
@@ -178,5 +203,21 @@ public class Transfer {
      */
     public void setCreateBy(String createBy) {
         this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Transfer{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", oprateUserId=" + oprateUserId +
+                ", createdAt=" + createdAt +
+                ", workOrderId=" + workOrderId +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", delFlag='" + delFlag + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", oprateName='" + oprateName + '\'' +
+                '}';
     }
 }

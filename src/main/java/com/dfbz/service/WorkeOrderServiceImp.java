@@ -2,6 +2,8 @@ package com.dfbz.service;
 
 
 import com.dfbz.dao.WorkOrderMapper;
+import com.dfbz.entity.Detail;
+import com.dfbz.entity.Transfer;
 import com.dfbz.entity.WorkOrder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -21,7 +23,7 @@ public class WorkeOrderServiceImp extends tservisceIpm<WorkOrder> implements Wor
     WorkOrderMapper wormapper;
 
     @Override
-    public  PageInfo<WorkOrder> selectByCondition(Map<String, Object> map) {
+    public PageInfo<WorkOrder> selectByCondition(Map<String, Object> map) {
         System.out.println(map);
         if (StringUtils.isEmpty(map.get("pageNum"))) {
             map.put("pageNum", 1);
@@ -35,6 +37,22 @@ public class WorkeOrderServiceImp extends tservisceIpm<WorkOrder> implements Wor
         System.out.println(list);
         PageInfo<WorkOrder> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Autowired
+    DetailService detailService;
+    @Autowired
+    TransferService transferService;
+
+    @Override
+    public WorkOrder selectOneByCondition(Integer id) {
+        WorkOrder workOrder = wormapper.selectByPrimaryKey(id);
+        List<Detail> details = detailService.selectOneByCondition(id);
+        List<Transfer> transfers = transferService.selectOneByCondition(id);
+        workOrder.setDetail(details);
+        workOrder.setTransfer(transfers);
+
+        return workOrder;
     }
 
 }

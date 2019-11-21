@@ -13,6 +13,7 @@ let em = new Vue({
                 officeName: '',
                 startDate: '',
                 endDate: ''
+                // code:''
             },
             setting: {
                 data: {
@@ -33,27 +34,47 @@ let em = new Vue({
             treeObj: {},
             name: ''
 
+
         }
     },
     methods: {
-        detail: function () {
-            let ly = layer.open({
-                type: 2,
-                title: "详细信息",
-                content:'html/work/work-detail.html',
-                area:['80%', '80%']
-                // end: () => {
-                //     console.log("***********************")
-                //     this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize)
-                // }
+        detail: function (id) {
+            // let ly = layer.open({
+            //     type: 2,
+            //     title: "详细信息",
+            //     content: 'html/work/work-detail.html',
+            //     area: ['80%', '80%'],
+            //     end: () => {
+            //         console.log("***********************")
+            //         this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize)
+            //     }
+            // })
+            axios({
+                url: 'manager/company/work/selectOneByCondition',
+                params:{
+                    id:id
+                }
+            }).then(response => {
+                layer.workOrder = response.data;
+
+                let ly = layer.open({
+                    type: 2,
+                    title: "详细信息",
+                    content: 'html/work/work-detail.html',
+                    area: ['80%', '80%'],
+                    end: () => {
+                        console.log("***********************")
+                        this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize)
+                    }
+                })
+            }).catch(function (error) {
+                console.log(error)
             })
-
-
         },
         selectByCondition: function (pageNum, pageSize) {
             this.map.pageNum = pageNum;
             this.map.pageSize = pageSize;
-            console.log(this.map)
+            // console.log(this.map)
             // console.log(this.pageInfo)
 
             axios({
@@ -88,7 +109,7 @@ let em = new Vue({
             let checkNodes = this.treeObj.getNodesByParamFuzzy("name", this.name, null);
             let nodesAll = this.treeObj.transformToArray(this.treeObj.getNodes());
             for (let index in nodesAll) {
-            this.map.officeName = this.name;
+                this.map.officeName = this.name;
                 for (let checkIndex in checkNodes) {
                     if (checkNodes[checkIndex].id == nodesAll[index].id) {
                         nodesAll[index].higtLine = true;

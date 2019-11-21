@@ -4,6 +4,7 @@ package com.dfbz.controller;
 import com.dfbz.entity.WorkOrder;
 import com.dfbz.service.WorkOrderService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,10 @@ public class WorkOrderController {
     public List<WorkOrder> selectAll(){
         List<WorkOrder> workOrders = worService.selectAll();
         return workOrders;
+    }
+    @RequestMapping("selectOneByCondition")
+    public WorkOrder selectOneByCondition(@Param("id") Integer id){
+        return worService.selectOneByCondition(id);
     }
 
 
