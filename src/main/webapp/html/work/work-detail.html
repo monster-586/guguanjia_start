@@ -95,7 +95,9 @@
                                         <div class="profile-info-name">工单状态</div>
                                         <div class="profile-info-value">
 			<span>
-					<font color="red">{{workOrder.status}}</font>
+                <font v-if="workOrder.status==0" color="red">待运输</font>
+                <font v-else-if="workOrder.status==1" color="green">运输中</font>
+                <font  v-else-if="workOrder.status==2" color="gray">已验收</font>
 			</span>
                                         </div>
                                     </div>
@@ -103,7 +105,7 @@
                                         <div class="profile-info-name">创建用户</div>
                                         <div class="profile-info-value">
 			<span>
-				{{workOrder.createName}}&nbsp;&nbsp;&nbsp;{{workOrder.phone}}
+				{{workOrder.createName}}&nbsp;&nbsp;&nbsp;
 			</span>
                                         </div>
                                     </div>
@@ -111,7 +113,7 @@
                                         <div class="profile-info-name">运输用户</div>
                                         <div class="profile-info-value">
 			<span>
-				{{workOrder.transportName}} -  &nbsp;&nbsp;&nbsp;
+				{{workOrder.transportName}} &nbsp;&nbsp;&nbsp;
 			</span>
                                         </div>
                                     </div>
@@ -119,14 +121,14 @@
                                         <div class="profile-info-name">处理用户</div>
                                         <div class="profile-info-value">
 			<span>
-				{{workOrder.recipientName}} - &nbsp;&nbsp;&nbsp;
+				{{workOrder.recipientName}} - {{workOrder.createOffice}}&nbsp;&nbsp;&nbsp;
 			</span>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name">转运清单</div>
                                         <div class="profile-info-value">
-                                            <span><b>运输车牌号：{{workOrder.detail.plateNumber}}</b></span>
+                                            <span><b>运输车牌号：{{workOrder.detail[0].plateNumber}}</b></span>
                                             <table class="table table-striped table-bordered table-hover nomargin-bottom">
                                                 <thead>
                                                 <tr>
@@ -139,13 +141,13 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td class="center">{{workOrder.detail.detailMe}}-{workOrder.detail.detailNa}}</td>
-                                                    <td class="center">{{workOrder.detail.detailCode}}</td>
-                                                    <td class="center">{{workOrder.detail.component}}</td>
-                                                    <td class="center">{{workOrder.detail.weight}}</td>
-                                                    <td class="center">{{workOrder.detail.morphological}}
-                                                    </td><td class="center">{{workOrder.detail.packaging}}
+                                                <tr v-for="detail in workOrder.detail">
+                                                    <td class="center">{{detail.detailMe}}-{detail.detailNa}}</td>
+                                                    <td class="center">{{detail.detailCode}}</td>
+                                                    <td class="center">{{detail.component}}</td>
+                                                    <td class="center">{{detail.weight}}</td>
+                                                    <td class="center">{{detail.morphological}}
+                                                    </td><td class="center">{{detail.packaging}}
                                                 </td></tr>
                                                 </tbody>
                                             </table>
@@ -160,11 +162,11 @@
                                                         <div class="mh-cont mh-list-wrap mh-unfold">
                                                             <div class="mh-list" style="border-top: 0px; padding:0px;">
                                                                 <ul style="margin:0px;">
-                                                                    <li class="first">
-                                                                        <p>{{workOrder.transfer.createDate}}</p>
-                                                                        <p>{{workOrder.transfer.content}}</p>
+                                                                    <li :class="index==0?'first':''" v-for="(transfer,index) in workOrder.transfer">
+                                                                        <p>{{transfer.createDate}}</p>
+                                                                        <p>{{transfer.content}}</p>
                                                                         <p></p>
-                                                                        <p>操作员：{{workOrder.transfer.oprateName}}&nbsp;&nbsp;{{workOrder.transfer.opratePhone}}</p>
+                                                                        <p>操作员：{{transfer.oprateName}}&nbsp;&nbsp;{{transfer.opratePhone}}</p>
                                                                         <span class="before"></span><span class="after"></span>
                                                                         <i class="mh-icon mh-icon-new"></i>
                                                                     </li><li>

@@ -12,6 +12,8 @@ public interface TransferMapper extends Mapper<Transfer> {
             " left join sys_user su " +
             " on tf.oprate_user_id=su.id " +
             " where tf.del_flag=0 " +
-            " and tf.work_order_id=#{id}")
+            " and tf.work_order_id=#{id}" +
+            " order by" +
+            " tf.create_date desc ")
     List<Transfer> selectOneByCondition(Integer id);
 }
