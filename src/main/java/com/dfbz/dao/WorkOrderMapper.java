@@ -23,8 +23,8 @@ public interface WorkOrderMapper extends Mapper<WorkOrder> {
         " on wo.create_user_id=su.id  " +
         " left join sys_office so " +
         " on su.office_id=so.id " +
-        " where wo.del_flag=0" +
-        "and wo.id=#{id} ")
+        " where wo.del_flag=0 " +
+        " and wo.id=#{id} ")
     WorkOrder selectOneByCondition(Integer id);
 
 }

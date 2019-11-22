@@ -46,7 +46,11 @@ public class WorkeOrderServiceImp extends tservisceIpm<WorkOrder> implements Wor
 
     @Override
     public WorkOrder selectOneByCondition(Integer id) {
-        WorkOrder workOrder = wormapper.selectByPrimaryKey(id);
+        WorkOrder workOrder = wormapper.selectOneByCondition(id);
+        System.out.println(workOrder);
+//        System.out.println(workOrder.getCreateName());
+//        System.out.println(workOrder.getTransportName());
+//        System.out.println(workOrder.getRecipientName());
         List<Detail> details = detailService.selectOneByCondition(id);
         List<Transfer> transfers = transferService.selectOneByCondition(id);
         workOrder.setDetail(details);

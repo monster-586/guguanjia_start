@@ -99,7 +99,10 @@ public class Test {
     }
     @org.junit.Test
     public void TestworkOneCondition(){
-        WorkOrder workOrder = worService.selectOneByCondition(1);
+        WorkOrder workOrder = worService.selectOneByCondition(2);
+        System.out.println(workOrder.getCreateName());
+        System.out.println(workOrder.getTransportName());
+        System.out.println(workOrder.getRecipientName());
         System.out.println(workOrder.getDetail());
         System.out.println(workOrder.getTransfer());
     }
@@ -118,5 +121,23 @@ public class Test {
     public void TesttransfOneCondition(){
         List<Transfer> transfers = transferService.selectOneByCondition(1);
         System.out.println(transfers);
+    }
+
+
+    @Autowired
+    AreaService areaService;
+    @org.junit.Test
+    public void TestAreaService(){
+        HashMap<String, Object> map = new HashMap<>();
+//        "treeId":"",
+//        "areaName":"广"，
+//        "pageNum":"1",
+//        "pageSize":"5"
+        map.put("treeId","");
+        map.put("areaName","广");
+        map.put("pageNum",1);
+        map.put("pageSize",5);
+        PageInfo<Area> areaPageInfo = areaService.selectByCondition(map);
+        System.out.println(areaPageInfo.getList());
     }
 }

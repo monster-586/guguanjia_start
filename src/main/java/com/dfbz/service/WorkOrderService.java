@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 public interface WorkOrderService extends tservice<WorkOrder> {
-@Autowired
+
 
     PageInfo<WorkOrder> selectByCondition(Map<String, Object> map);
 

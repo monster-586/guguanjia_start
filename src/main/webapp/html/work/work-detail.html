@@ -142,7 +142,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr v-for="detail in workOrder.detail">
-                                                    <td class="center">{{detail.detailMe}}-{detail.detailNa}}</td>
+                                                    <td class="center">{{detail.detailMe}}-{{detail.detailNa}}</td>
                                                     <td class="center">{{detail.detailCode}}</td>
                                                     <td class="center">{{detail.component}}</td>
                                                     <td class="center">{{detail.weight}}</td>
@@ -198,8 +198,8 @@
     $(function () {
 
         $("#navbar").load("html/commons/navbar.html");
-        $("#sidebar").load("html/commons/sidebar.html");
-        $("#ace-settings-container").load("html/commons/ace-settings-container.html");
+        // $("#sidebar").load("html/commons/sidebar.html");
+        // $("#ace-settings-container").load("html/commons/ace-settings-container.html");
     })
 </script>
 <!-- basic scripts -->
