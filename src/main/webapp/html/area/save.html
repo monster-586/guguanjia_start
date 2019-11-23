@@ -58,14 +58,14 @@
         <div class="page-content">
 
             <div class="page-header">
-                <h1> 重庆市编辑 </h1>
+                <h1> {{areaSave.name}}编辑 </h1>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div id="fill-main-content" style="height:100%">
                         <div class="xuboxPageHtml" id="xboxTest" style="overflow-y: auto; height: 321px;">
                             <div class="layer">
-                                <form name="FormPost" id="area-save" class="FormGrid" method="post" action="area/save">
+                                <form name="FormPost" id="area-save" class="FormGrid" method="post" >
 
                                     <input type="hidden" value="2" name="id">
                                     <input type="hidden" value="0," name="parentIds">
@@ -77,18 +77,18 @@
                                         </tr>
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域名称</td>
-                                            <td class="DataTD width-100"><input type="text" name="name" datatype="*"
-                                                                                nullmsg="请输入区域名称！" value="重庆市"></td>
+                                            <td class="DataTD width-100"><input type="text" name="name"  v-model="areaSave.name"
+                                                                                nullmsg="请输入区域名称！" ></td>
                                         </tr>
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域编码</td>
-                                            <td class="DataTD width-100"><input type="text" name="code" datatype="*"
-                                                                                nullmsg="请输入区域编码！" value="110000"></td>
+                                            <td class="DataTD width-100"><input type="text" name="code"  v-model="areaSave.code"
+                                                                                nullmsg="请输入区域编码！" ></td>
                                         </tr>
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域类型</td>
                                             <td class="DataTD width-100">
-                                                <select class="chosen-select " name="type" id="chosen-select"
+                                                <select class="chosen-select " name="type" id="chosen-select" v-model="areaSave.type"
                                                         style="display: none;">
                                                     <option value="1">
                                                         国家
@@ -113,14 +113,11 @@
 
                                                 <div class="clearfix width-100  input-group" style="">
                                                     <input class="form-control search-query" type="text" readonly=""
-                                                           id="treeselectname" name="" value="中国">
+                                                           id="treeselectname" v-model="areaSave.parentName">
                                                     <span class="input-group-btn">
-		<span class="btn btn-purple btn-sm" type="button" style="height: 34px;" data-mode="page"
-              data-url="/guguanjia/manager/tag/treeselect"
-              data-data="{url:'/guguanjia/manager/area/tree',id:'treeselectid',nameId:'treeselectname',pIdKey:'parentId',selectIds:'1',curId:'2',checked:'false',rootNodeName:'',isLayer:'true'}"
-              data-title="请选择" data-width="350px" data-height="400px">
+		<span class="btn btn-purple btn-sm" type="button" style="height: 34px;"  >
 			<i class="ace-icon fa fa-search bigger-110" ></i>
-            <a href="select.html" >查找</a>
+<!--            <a href="select.html" >查找</a>-->
 		</span>
 	</span>
                                                     <input type="hidden" name="parentId" id="treeselectid" value="1">
@@ -132,12 +129,12 @@
                                             <td class="CaptionTD">区域图标</td>
                                             <td class="DataTD">
                                                 <div class="width-100 clearfix ">
-                                                    <input type="hidden" value="fa fa-smile-o" name="icon"
+                                                    <input type="hidden" value="fa fa-smile-o" name="icon" v-model="areaSave.icon"
                                                            id="icon-input">
-                                                    <i class="ace-icon fa fa-smile-o bigger-200 pink"
+                                                    <i class="ace-icon  bigger-200 pink" :class="areaSave.icon"
                                                        style="vertical-align: middle;padding-right: 10px;"></i>
-                                                    <span class="btn btn-sm btn-purple" id="icon-icon-btn">
-		<i class="ace-icon fa fa-search bigger-110"></i>查找
+                                                    <span class="btn btn-sm btn-purple" id="icon-icon-btn"  @click="selectIcon">
+		<i class="ace-icon fa fa-search bigger-110" ></i>查找
 	</span>
                                                 </div>
 
@@ -146,7 +143,7 @@
                                         <tr class="FormData">
                                             <td class="CaptionTD">区域描述</td>
                                             <td class="DataTD">
-                                                <textarea name="remarks" class="autosize-transition form-control "
+                                                <textarea name="remarks" class="autosize-transition form-control " v-model="areaSave.remarks"
                                                           style="resize: none; overflow: hidden; word-wrap: break-word; height: 52px;"></textarea>
                                             </td>
                                         </tr>
@@ -157,7 +154,7 @@
 
                             <div class="width-100 clearfix" tag-save-btn=""
                                  style="bottom: -36px; left: 0px; position: absolute;">
-	<span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" id="area-save-save">
+	<span class="btn btn-primary btn-sm bigger-110 width-50  pull-left" id="area-save-save" >
 		<i class="ace-icon fa fa-floppy-o align-top bigger-125"></i> 确 定
 	</span>
                                 <span class="btn btn-yellow btn-sm bigger-110 width-50 pull-right"
@@ -221,7 +218,7 @@
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
 
-<!--<script type="text/javascript" src="static/js/area/detail.js"></script>-->
+<script type="text/javascript" src="static/js/area/save.js"></script>
 
 </body>
 </html>

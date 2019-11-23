@@ -116,8 +116,7 @@
                                     </form>
                                 </div>
                                 <div class="widget-toolbar">
-			<span class="btn btn-purple btn-xs"
-                  onclick="Angel.downloadFile('search-form','area/export')">
+			<span class="btn btn-purple btn-xs"  @click="exportExcel">
 			<i class="ace-icon fa fa-cloud-upload bigger-130"></i>
 			导出Excel</span>
                                 </div>
@@ -125,10 +124,12 @@
 			<span class="btn btn-purple btn-xs" id="importFile">
 				<i class="ace-icon fa fa-cloud-download bigger-130"></i>
 				<span>导入数据</span>
-				<input type="file" class="phide" name="excel"
-                       data-url="area/import" _accept="application/vnd.ms-excel"
-                       data-progressid="#excel-progress"
-                       onchange="Angel.uploadFile.excel(this);"/>
+
+
+				<input type="file" class="phide" name="excel"  @change="importExcel"/>
+
+
+
 			</span>
                                 </div>
                                 <div class="widget-toolbar no-border">
@@ -165,9 +166,9 @@
                                                 <tbody>
                                                 <tr v-for="area in pageInfo.list">
                                                     <td class="center">
-                                                        <a href="area-detail.html"
+                                                        <a  @click="selectOneById(area.id)"
                                                            data-title="*************详情" data-mode="detail"
-                                                           data-url="area/detail/showlayer"
+
                                                            data-data="{id:'2'}"
                                                         >{{area.name}}</a>
                                                     </td>
@@ -185,20 +186,11 @@
                                                     </td>
                                                     <td class="center">
                                                         <div class="hidden-sm hidden-xs action-buttons">
-                                                            <a class="green" href="area-save.html"
-                                                               data-mode="page" data-title="****************编辑"
-                                                               data-url="area/edit/showlayer"
-                                                               data-data="{id:'2',parentId:'1'}"
-                                                               data-width="50%"
-                                                            >
+                                                            <a class="green"  @click="toSave(area.id)">
                                                                 <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                             </a>
 
-                                                            <a class="red" href="javascript:void(0);"
-                                                               data-mode="del" data-title="删除操作"
-                                                               data-msg="<span class='red bigger-120'>你确定删除吗?</span>"
-                                                               data-url="area/delete" data-data="{id:'2'}"
-                                                            >
+                                                            <a class="red"  @click="">
                                                                 <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                             </a>
                                                         </div>

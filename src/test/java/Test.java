@@ -1,4 +1,11 @@
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.read.metadata.ReadSheet;
+import com.alibaba.excel.write.metadata.WriteSheet;
+import com.dfbz.Listener.SysAreaListener;
 import com.dfbz.config.SpringMybatis;
+import com.dfbz.dao.AreaMapper;
 import com.dfbz.dao.ExamineMapper;
 import com.dfbz.entity.*;
 import com.dfbz.service.*;
@@ -30,6 +37,7 @@ public class Test {
 
     @Autowired
     WorkOrderService worService;
+
     @org.junit.Test
     public void test() {
         List<Qualification> qualifications = qualificationService.selectAll();
@@ -42,10 +50,10 @@ public class Test {
         Example example = new Example(Qualification.class);
         example.createCriteria().
                 andEqualTo("delFlag", 0).
-                andEqualTo("check",2).
+                andEqualTo("check", 2).
                 andEqualTo("type", 1).
-                andGreaterThan("createDate","2017-05-01").
-                andLessThan("createDate","2019-12-23");
+                andGreaterThan("createDate", "2017-05-01").
+                andLessThan("createDate", "2019-12-23");
 
         List<Qualification> qualifications = qualificationService.selectByExample(example);
 
@@ -55,30 +63,33 @@ public class Test {
         }
 
     }
+
     @org.junit.Test
-    public void testqul(){
+    public void testqul() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("delFlag","0");
-        map.put("check","2");
-        map.put("type","1");
-        map.put("createDate","2017-05-01");
-        map.put("endDate","2019-12-23");
+        map.put("delFlag", "0");
+        map.put("check", "2");
+        map.put("type", "1");
+        map.put("createDate", "2017-05-01");
+        map.put("endDate", "2019-12-23");
         PageInfo<Qualification> pageInfo = qualificationService.selsctByorder(map);
         System.out.println(pageInfo.toString());
     }
+
     @org.junit.Test
-    public  void TestExaMapper(){
+    public void TestExaMapper() {
         HashMap<String, Object> examine = new HashMap<>();
-        examine.put("officeId",56);
+        examine.put("officeId", 56);
         List<Examine> examines = examineMapper.selectByCondition(examine);
         for (Examine examine1 : examines) {
             System.out.println(examine1);
         }
     }
+
     @org.junit.Test
-    public void TestExaservice(){
+    public void TestExaservice() {
         HashMap<String, Object> examine = new HashMap<>();
-        examine.put("officeId",56);
+        examine.put("officeId", 56);
         PageInfo<Examine> examinePageInfo = examineService.selectByCondition(examine);
         List<Examine> list = examinePageInfo.getList();
         for (Examine examine1 : list) {
@@ -86,10 +97,11 @@ public class Test {
 
         }
     }
+
     @org.junit.Test
-    public void TestWorkservice(){
+    public void TestWorkservice() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("officeName","");
+        map.put("officeName", "");
         PageInfo<WorkOrder> examinePageInfo = worService.selectByCondition(map);
         List<WorkOrder> list = examinePageInfo.getList();
         for (WorkOrder workOrder : list) {
@@ -97,8 +109,9 @@ public class Test {
 
         }
     }
+
     @org.junit.Test
-    public void TestworkOneCondition(){
+    public void TestworkOneCondition() {
         WorkOrder workOrder = worService.selectOneByCondition(2);
         System.out.println(workOrder.getCreateName());
         System.out.println(workOrder.getTransportName());
@@ -106,19 +119,22 @@ public class Test {
         System.out.println(workOrder.getDetail());
         System.out.println(workOrder.getTransfer());
     }
+
     @Autowired
-    DetailService detailService;
+    AreaMapper areaMapper;
+
     @org.junit.Test
-    public void TestdetailOneCondition(){
-        List<Detail> details = detailService.selectOneByCondition(1);
-        System.out.println(details);
+    public void TestdetailOneCondition() {
+        Area area = areaMapper.selectOneById(1L);
+        System.out.println(area);
     }
 
 
     @Autowired
-   TransferService transferService;
+    TransferService transferService;
+
     @org.junit.Test
-    public void TesttransfOneCondition(){
+    public void TesttransfOneCondition() {
         List<Transfer> transfers = transferService.selectOneByCondition(1);
         System.out.println(transfers);
     }
@@ -126,18 +142,38 @@ public class Test {
 
     @Autowired
     AreaService areaService;
+
     @org.junit.Test
-    public void TestAreaService(){
+    public void TestAreaService() {
         HashMap<String, Object> map = new HashMap<>();
 //        "treeId":"",
 //        "areaName":"广"，
 //        "pageNum":"1",
 //        "pageSize":"5"
-        map.put("treeId","");
-        map.put("areaName","广");
-        map.put("pageNum",1);
-        map.put("pageSize",5);
+        map.put("treeId", "");
+        map.put("areaName", "广");
+        map.put("pageNum", 1);
+        map.put("pageSize", 5);
         PageInfo<Area> areaPageInfo = areaService.selectByCondition(map);
         System.out.println(areaPageInfo.getList());
+    }
+
+    @org.junit.Test
+    public void TestExcelWrite() {
+        ExcelWriter excelWriter = EasyExcel.write("D:\\excel\\area.xlsx", Area.class).build();
+        WriteSheet writeSheet = EasyExcel.writerSheet(0).build();
+        List<Area> areas = areaMapper.selectAll();
+        excelWriter.write(areas, writeSheet);
+        excelWriter.finish();
+
+    }
+
+    @org.junit.Test
+    public void TestExcelSave() {
+
+        ExcelReader excelReader = EasyExcel.read("D:\\excel\\area.xlsx", Area.class, new SysAreaListener(areaMapper)).build();
+        ReadSheet readSheet = EasyExcel.readSheet(0).build();
+        excelReader.read(readSheet);
+        excelReader.finish();
     }
 }

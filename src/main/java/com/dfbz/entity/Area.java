@@ -1,5 +1,9 @@
 package com.dfbz.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -50,7 +54,10 @@ public class Area {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Column(name = "create_date")
+    @DateTimeFormat("yyyy年mm月dd日")
+    @ExcelProperty("创建日期")
     private Date createDate;
 
     /**
@@ -62,6 +69,7 @@ public class Area {
     /**
      * 更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Column(name = "update_date")
     private Date updateDate;
 

@@ -57,7 +57,7 @@
 		<div class="page-content">
 
 			<div class="page-header">
-				<h1> 重庆市详情 </h1>
+				<h1> {{areaDetail.name}}详情 </h1>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
@@ -67,25 +67,28 @@
 								<div class="profile-info-row">
 									<div class="profile-info-name">名称</div>
 									<div class="profile-info-value">
-										重庆市
+										{{areaDetail.name}}
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">区域编码</div>
 									<div class="profile-info-value">
-										110000
+										{{areaDetail.code}}
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">区域类型</div>
 									<div class="profile-info-value">
-										省份、直辖市
+										<span v-if="areaDetail.type==1">国家</span>
+										<span v-else-if="areaDetail.type==2">省份、直辖市</span>
+										<span v-else-if="areaDetail.type==3">地级市</span>
+										<span v-else-if="areaDetail.type==4">区域</span>
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">上级区域</div>
 									<div class="profile-info-value">
-										中国
+										{{areaDetail.parentName}}
 									</div>
 								</div>
 								<div class="profile-info-row">
@@ -97,29 +100,29 @@
 								<div class="profile-info-row">
 									<div class="profile-info-name">创建者</div>
 									<div class="profile-info-value">
-										1
+										{{areaDetail.createBy}}
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">创建时间</div>
 									<div class="profile-info-value">
-										2013-05-27 08:00:00.0
+										{{areaDetail.createDate}}
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">更新者</div>
 									<div class="profile-info-value">
-										2,超级管理员
+										{{areaDetail.updateBy}}
 									</div>
 								</div>
 								<div class="profile-info-row">
 									<div class="profile-info-name">更新时间</div>
 									<div class="profile-info-value">
-										2016-07-24 17:35:01.0
+										{{areaDetail.updateDate}}
 									</div>
 								</div>
 								<div class="profile-info-row">
-									<div class="profile-info-name">备注</div>
+									<div class="profile-info-name">{{areaDetail.remarks}}</div>
 									<div class="profile-info-value">
 
 									</div>
@@ -170,10 +173,12 @@
 <script type="text/javascript" src="static/js/bootstrap-contextmenu.js"></script>
 <script type="text/javascript" src="static/js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="static/js/public.js"></script>
+
+
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
 
-<!--<script type="text/javascript" src="static/js/area/detail.js"></script>-->
+<script type="text/javascript" src="static/js/area/areaDetail.js"></script>
 
 
 </body>
