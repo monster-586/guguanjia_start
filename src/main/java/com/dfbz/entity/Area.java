@@ -24,12 +24,44 @@ public class Area {
     @Column(name = "parent_id")
     private Long parentId;
 
+    @Transient
+    private Long oldparentId;
+
+    public Long getOdlparentId() {
+        return oldparentId;
+    }
+
+    public void setOdlparentId(Long odlparentId) {
+        this.oldparentId = odlparentId;
+    }
+
     /**
      * 所有父级编号
      */
     @Column(name = "parent_ids")
     private String parentIds;
 
+    @Transient
+    private String oldparentIds;
+
+    public String getOldparentIds() {
+        return oldparentIds;
+    }
+
+    public void setOldparentIds(String oldparentIds) {
+        this.oldparentIds = oldparentIds;
+    }
+
+    @Transient
+    private String parentName;
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
     /**
      * 区域编码
      */
@@ -85,16 +117,9 @@ public class Area {
     private String delFlag;
 
     private String icon;
-    @Transient
-    private String parentName;
 
-    public String getParentName() {
-        return parentName;
-    }
 
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
+
 
     /**
      * 获取编号
@@ -331,7 +356,10 @@ public class Area {
         return "Area{" +
                 "id=" + id +
                 ", parentId=" + parentId +
+                ", odlparentId=" + oldparentId +
                 ", parentIds='" + parentIds + '\'' +
+                ", oldparentIds='" + oldparentIds + '\'' +
+                ", parentName='" + parentName + '\'' +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +

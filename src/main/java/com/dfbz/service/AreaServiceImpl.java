@@ -39,11 +39,6 @@ public class AreaServiceImpl extends tservisceIpm<Area> implements AreaService {
             map.put("pageSize",5);
         }
         PageHelper.startPage((Integer) map.get("pageNum"),(Integer) map.get("pageSize"));
-        System.out.println("*1**"+map);
-        System.out.println("*2**"+map.get("pageNum"));
-        System.out.println("*3**"+map.get("pageSize"));
-        System.out.println("*4**"+map.get("treeId"));
-        System.out.println("*5**"+map.get("areaName"));
         List<Area> areas = areaMapper.selectByCondition(map);
         PageInfo<Area> pageInfo = new PageInfo<>(areas);
         return pageInfo;
@@ -64,6 +59,7 @@ public class AreaServiceImpl extends tservisceIpm<Area> implements AreaService {
         excelWriter.finish();
     }
 
+
     @Override
     public void ExcelRead(InputStream inputStream) {
         ExcelReader excelReader = EasyExcel.read(inputStream,Area.class,new SysAreaListener(areaMapper)).build();
@@ -72,7 +68,16 @@ public class AreaServiceImpl extends tservisceIpm<Area> implements AreaService {
         excelReader.finish();
     }
 
+    @Override
+    public int updateAllParentIds(Area area) {
 
+        return areaMapper.updateAllParentIds(area);
+    }
+
+    @Override
+    public int updateOne(Area area) {
+        return areaMapper.updateOne(area);
+    }
 
 
 }

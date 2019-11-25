@@ -2,6 +2,7 @@ let em = new Vue({
     el: '#main-container',
     data: function () {
         return {
+            wind:{},
             map: {
                 treeId: '',
                 areaName: '',
@@ -15,14 +16,16 @@ let em = new Vue({
             },
             setting: {
                 data: {
-                    key: {title: ""},
+                    key: {
+                        title: ""
+                    },
                     simpleData: {
                         enable: true,
                         pIdKey: 'parentId'
                     }
                 },
                 callback: {onClick: this.TreeClick},
-                view: {}
+
             },
             nodes: [],
             treeObj: {}
@@ -80,14 +83,18 @@ let em = new Vue({
 
         },
         selectOneById: function (id) {
+            this.map.treeId=id;
             axios({
-                url: 'manager/area/selectOneById',
-                params: {
-                    id: id
-                }
+                url: 'manager/area/selectByCondition',
+                method:'post',
+                data:this.map
+                // url: 'manager/area/selectOneById',
+                // params: {
+                //     id: id
+                // }
             }).then(response => {
                 layer.areaDetail = response.data;
-                console.log(response.data)
+                console.log(response.data+"123456")
                 let upd = layer.open({
                     type: 2,
                     title: "详细信息",
@@ -135,7 +142,8 @@ let em = new Vue({
                 }
             }).then(response => {
                 layer.areaSave = response.data;
-                console.log(response.data)
+                console.log(response.data);
+                let _this = this;
                 let upd = layer.open({
                     type: 2,
                     title: "编辑",
@@ -143,7 +151,7 @@ let em = new Vue({
                     area: ['80%', '80%'],
                     end: () => {
                         console.log("**********");
-                        this.selectByCondition(this.pageInfo.pageNum,this.pageInfo.pageSize)
+                        this.selectByCondition(this.pageInfo.pageNum,this.pageInfo.pageSize);
                     }
                 });
             }).catch(function (error) {

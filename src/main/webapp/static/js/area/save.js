@@ -1,7 +1,11 @@
 let em = new Vue({
     el: '#main-container',
     data: {
-        areaSave: {}
+
+        areaSave: {},
+
+        name: '',
+
     },
     methods: {
         selectIcon: function () {
@@ -16,23 +20,55 @@ let em = new Vue({
                 }
             });
         },
-        dones: function () {
+        toSelect: function () {
+            // this.areaSave.oldParentId=this.areaSave.parentId;
+            // this.areaSave.oldParentIds=this.areaSave.parentIds;
             axios({
                 url: 'manager/area/list',
                 method: 'get',
                 params: ''
             }).then(response => {
-                layer.done = response.data;
+                layer.obj = response.data;
                 let vv = layer.open({
                     type: 2,
                     title: "选择上级区域",
                     content: 'html/area/select.html',
                     area: ['80%', '80%'],
                     end: () => {
-                        console.log("***********************2");
-                        this.dones();
+                        this.areaSave.parentId = layer.pId;
+                        this.areaSave.parentName = layer.name;
+
                     }
                 })
+            }).catch(function (error) {
+                console.log(error)
+            })
+        },
+
+        // getById: function (pId) {
+        //     axios({
+        //         url: 'manager/area/selectOneById',
+        //         params: {
+        //             id: pId
+        //         }
+        //     }).then(response => {
+        //         this.areaSave = response.data;
+        //         // console.log(response.data);
+        //     }).catch(function (error) {
+        //         layer.msg(error)
+        //     })
+        //
+        // }
+        save: function () {
+
+            axios({
+                url: 'manager/area/update',
+                method: 'post',
+                data: this.areaSave
+            }).then(response => {
+                layer.msg(response.data)
+                // let index = parent.layer.getFrameIndex(window.name);
+                // parent.layer.close(index)
             }).catch(function (error) {
                 console.log(error)
             })

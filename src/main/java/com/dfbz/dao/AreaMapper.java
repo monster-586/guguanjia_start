@@ -23,5 +23,20 @@ public interface AreaMapper extends Mapper<Area> {
     @InsertProvider(type = AreaSqlProvider.class,method = "insertBatch")
      void insertBatch(@Param("Area") List<Area> Area);
 
+    @Update("update  " +
+            " sys_area " +
+            "set " +
+            " parent_ids = REPLACE(parent_ids,#{oldparentId},#{parentIds}) " +
+            "where " +
+            " parent_ids like concat('%',#{id},'%')")
+    int updateAllParentIds(Area area);
 
+    @Update(" update " +
+            " sys_area " +
+            " set " +
+            " parent_id=#{parentId}," +
+            " parent_ids = REPLACE(parent_ids,#{oldparentId},#{parentId})" +
+            " where " +
+            " id=#{id}")
+    int updateOne(Area area);
 }

@@ -123,11 +123,11 @@ public class Test {
     @Autowired
     AreaMapper areaMapper;
 
-    @org.junit.Test
-    public void TestdetailOneCondition() {
-        Area area = areaMapper.selectOneById(1L);
-        System.out.println(area);
-    }
+//    @org.junit.Test
+//    public void TestdetailOneCondition() {
+//        Area area = areaMapper.selectOneById(1L);
+//        System.out.println(area);
+//    }
 
 
     @Autowired
@@ -175,5 +175,25 @@ public class Test {
         ReadSheet readSheet = EasyExcel.readSheet(0).build();
         excelReader.read(readSheet);
         excelReader.finish();
+    }
+
+    @org.junit.Test
+    public void TestAreUpDataOne(){
+        Area area = new Area();
+        area.setId(5L);
+        area.setOdlparentId(3L);
+        area.setParentId(2L);
+
+        System.out.println(areaMapper.updateOne(area));
+    }
+
+    @org.junit.Test
+    public void TestAreUpDataAll(){
+        Area area = new Area();
+        area.setId(6L);
+        area.setOldparentIds("0,1,");
+        area.setParentIds("0,2,");
+
+        System.out.println(areaMapper.updateAllParentIds(area));
     }
 }
