@@ -14,6 +14,7 @@ import com.dfbz.entity.Area;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -77,6 +78,12 @@ public class AreaServiceImpl extends tservisceIpm<Area> implements AreaService {
     @Override
     public int updateOne(Area area) {
         return areaMapper.updateOne(area);
+    }
+
+    @Override
+    @Cacheable(value = "areasCache",key = "'Area:SelectAll'")
+    public List<Area> selectAll() {
+        return super.selectAll();
     }
 
 

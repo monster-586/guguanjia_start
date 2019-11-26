@@ -3,6 +3,7 @@ package com.dfbz.service;
 
 import com.dfbz.entity.Area;
 import com.github.pagehelper.PageInfo;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,5 +23,7 @@ public interface AreaService extends tservice<Area> {
     int updateAllParentIds(Area area);/*在跟新完某条数据后更新表格所有ParentIds*/
 
     int updateOne(Area area);
+
+
 
 }

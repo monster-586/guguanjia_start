@@ -196,4 +196,11 @@ public class Test {
 
         System.out.println(areaMapper.updateAllParentIds(area));
     }
+    @org.junit.Test
+    public void Test(){
+        List<Area> areas = areaService.selectAll();
+        for (Area area : areas) {
+            System.out.println(area);
+        }
+    }
 }

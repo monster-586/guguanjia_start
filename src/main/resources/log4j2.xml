@@ -8,10 +8,14 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="cn.nyse.dao" level="trace" additivity="false">
+        <Logger name="com.dfbz.dao" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Root level="debug">
+        <!--查看缓存命中信息-->
+        <Logger name="org.springframework.cache" level="trace" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
