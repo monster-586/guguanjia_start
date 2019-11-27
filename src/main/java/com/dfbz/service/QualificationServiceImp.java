@@ -2,19 +2,17 @@ package com.dfbz.service;
 
 
 import com.dfbz.dao.QualificationMapper;
-import com.dfbz.dao.SysuserMapper;
+import com.dfbz.dao.SysUserMapper;
 import com.dfbz.entity.Qualification;
 
-import com.dfbz.entity.Sysuser;
+import com.dfbz.entity.SysUser;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mysql.fabric.xmlrpc.base.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import tk.mybatis.mapper.entity.Example;
 
 import java.io.File;
@@ -29,7 +27,7 @@ public class QualificationServiceImp extends tservisceIpm<Qualification> impleme
     @Autowired
     QualificationMapper quaMapper;
     @Autowired
-    SysuserMapper sysuserMapper;
+    SysUserMapper sysuserMapper;
 
     @Override
     public PageInfo<Qualification> selsctByorder(Map<String, Object> map) {
@@ -75,7 +73,7 @@ public class QualificationServiceImp extends tservisceIpm<Qualification> impleme
     public Qualification selectByPrimaryKey(Object key) {
         //根据上传用户id关联用户表查询office_id
         Qualification qualification = mapper.selectByPrimaryKey(key);
-        Sysuser sysUser = sysuserMapper.selectByPrimaryKey(qualification.getUploadUserId());
+        SysUser sysUser = sysuserMapper.selectByPrimaryKey(qualification.getUploadUserId());
         // uploads/文件夹名称(企业id)/用户图片名/ File.separator 是系统默认的文件分隔符号
         qualification.setAddress(imgPath + sysUser.getOfficeId() + File.separator + qualification.getAddress());
         return qualification;

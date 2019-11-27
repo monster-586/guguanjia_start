@@ -169,7 +169,7 @@
                                                     </li>
                                                     <li class="active"><a  @Click="selectAll(pageInfo.prePage,pageInfo.pageSize)" :class="pageInfo.pageNum==1?'hidden':''">上一页</a>
                                                     </li>
-                                                    <li class=""><a o@Click="selectAll(pageInfo.pageNum,pageInfo.pageSize)">{{pageInfo.pageNum}}</a>
+                                                    <li class=""><a @Click="selectAll(pageInfo.pageNum,pageInfo.pageSize)">{{pageInfo.pageNum}}</a>
                                                     </li>
                                                     <li class="active"><a @Click="selectAll(pageInfo.nextPage,pageInfo.pageSize)" :class="pageInfo.pageNum==pageInfo.pages?'hidden':''">下一页</a>
                                                     </li>

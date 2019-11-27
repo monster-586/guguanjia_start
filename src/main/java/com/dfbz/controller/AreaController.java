@@ -2,12 +2,9 @@ package com.dfbz.controller;
 
 
 import com.dfbz.entity.Area;
-import com.dfbz.entity.Sysuser;
 import com.dfbz.service.AreaService;
-import com.dfbz.service.SysuserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

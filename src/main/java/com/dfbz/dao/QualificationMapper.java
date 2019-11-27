@@ -2,7 +2,6 @@ package com.dfbz.dao;
 
 
 import com.dfbz.entity.Qualification;
-import com.dfbz.entity.Sysuser;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 

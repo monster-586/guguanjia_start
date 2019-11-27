@@ -3,7 +3,6 @@ package com.dfbz.service;
 
 import com.dfbz.dao.DetailMapper;
 import com.dfbz.entity.Detail;
-import com.dfbz.entity.Sysuser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
