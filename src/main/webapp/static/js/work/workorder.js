@@ -133,6 +133,7 @@ let em = new Vue({
 
         Click: function (event, treeId, treeNode) {
             this.name = treeNode.name;
+
             // console.log(treeNode.name)
         },
         showTree: function (flag) {

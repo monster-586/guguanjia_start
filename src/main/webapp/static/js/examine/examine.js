@@ -42,8 +42,6 @@ let em = new Vue({
             this.map.pageNum = pageNum;
             this.map.pageSize = pageSize;
             console.log(this.map)
-            // console.log(this.pageInfo)
-
             axios({
                 url: "manager/examine/index/selectByCondition",
                 method: "post",
