@@ -3,9 +3,11 @@ package com.dfbz.dao;
 
 import com.dfbz.entity.SysRole;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface SysRoleMapper extends Mapper<SysRole> {
@@ -21,4 +23,7 @@ public interface SysRoleMapper extends Mapper<SysRole> {
             " where  " +
             " su.id=#{userId}")
     List<SysRole> selectRoleByUserId(Long userId);
+
+@SelectProvider(type = SysRoleMapperPrvoider.class,method = "selectByCondition")
+    List<SysRole> selectByCondition(Map<String, Object> params);
 }

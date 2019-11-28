@@ -6,10 +6,10 @@ let em = new Vue({
             map: {
                 pageNum: '',
                 pageSize: '',
-                roleId: '',
-                userId: '',
-                officeId: '',
-                userName: ''
+                offId: '',
+                roleType: '',
+                roleName: '',
+                DesCri: ''
             },
             pageInfo: {
                 pageNum: 1,
@@ -38,20 +38,20 @@ let em = new Vue({
             this.map.pageNum = pageNum;
             this.map.pageSize = pageSize;
             axios({
-                url: "manager/sysuser/selectByCondition",
+                url: "manager/role/selectByCondition",
                 method: "post",
                 data: this.map
 
             }).then(response => {
                 this.pageInfo = response.data;
-                this.map.officeId='';
+                // this.map.officeId='';
             }).catch(function (error) {
                 console.log(error);
             })
         },
         initTree: function () {
             axios({
-                url: "manager/office/list",
+                url: "manager/role/list",
                 method: 'get',
                 params: ''
             }).then(response => {
@@ -67,34 +67,34 @@ let em = new Vue({
         },
         TreeClick: function (event, treeId, treeNode) {
             this.name=treeNode.name;
-            this.map.officeId=treeNode.id;
+            this.map.offId=treeNode.id;
         },
-        toSave: function (uid) {
-            this.map.userId=uid;
-            axios({
-                url: 'manager/sysuser/selectByCondition',
-                method: "post",
-                data: this.map
-            }).then(response => {
-                layer.areaSave = response.data;
-                console.log(response.data);
-                let _this = this;
-                let upd = layer.open({
-                    type: 2,
-                    title: "修改",
-                    content: 'html/user/detail.html',
-                    area: ['80%', '80%'],
-                    end: () => {
-                        console.log("**********");
-                        this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize);
-                    }
-                });
-            }).catch(function (error) {
-                layer.msg(error)
-            })
-
-
-        },
+        // toSave: function (uid) {
+        //     this.map.userId=uid;
+        //     axios({
+        //         url: 'manager/sysuser/selectByCondition',
+        //         method: "post",
+        //         data: this.map
+        //     }).then(response => {
+        //         layer.areaSave = response.data;
+        //         console.log(response.data);
+        //         let _this = this;
+        //         let upd = layer.open({
+        //             type: 2,
+        //             title: "修改",
+        //             content: 'html/user/detail.html',
+        //             area: ['80%', '80%'],
+        //             end: () => {
+        //                 console.log("**********");
+        //                 this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize);
+        //             }
+        //         });
+        //     }).catch(function (error) {
+        //         layer.msg(error)
+        //     })
+        //
+        //
+        // },
         searchClear: function () {
             console.log("aaaa");
 
@@ -114,7 +114,7 @@ let em = new Vue({
             let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
             // let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
 
-            this.map.officeName = this.name;
+            // this.map.officeName = this.name;
             for (let index in nodeArr) {
                 for (let nodeIndex in node) {
                     if (nodeArr[index].id == node[nodeIndex].id) {

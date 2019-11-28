@@ -7,6 +7,7 @@ import com.dfbz.Listener.SysAreaListener;
 import com.dfbz.config.SpringMybatis;
 import com.dfbz.dao.AreaMapper;
 import com.dfbz.dao.ExamineMapper;
+import com.dfbz.dao.SysRoleMapper;
 import com.dfbz.dao.SysUserMapper;
 import com.dfbz.entity.*;
 import com.dfbz.service.*;
@@ -213,16 +214,22 @@ SysUserService sysUserService;
     @org.junit.Test
     public void TestSysRole() {
         HashMap<String, Object> map = new HashMap<>();
-//        map.put("userId", 26);
-//        map.put("officeId", 47);
-//        map.put("userName", "吉");
-//        map.put("roleId", 1);
         map.put("pageNum",2);
         map.put("pageSize",2);
         PageInfo<SysUser> sysUserPageInfo = sysUserService.selectByCondition(map);
-
         System.out.println(sysUserPageInfo);
-//        System.out.println(sysusers.get(0).getRoles());
 
     }
+
+    @Autowired
+    SysRoleService sysRoleMapper;
+    @org.junit.Test
+    public void TestRole(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("roleId",2);
+        PageInfo<SysRole> sysRolePageInfo = sysRoleMapper.selectByCondition(map);
+        System.out.println(sysRolePageInfo);
+
+    }
+
 }
