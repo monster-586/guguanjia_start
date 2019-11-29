@@ -232,4 +232,12 @@ SysUserService sysUserService;
 
     }
 
+    @org.junit.Test
+    public void NotRole(){
+        List<SysUser> sysUsers = sysUserService.selectNotRole(2L);
+        for (SysUser sysUser : sysUsers) {
+            System.out.println(sysUser);
+        }
+    }
+
 }

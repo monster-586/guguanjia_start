@@ -22,7 +22,6 @@ public class SysUserController {
     SysUserService syuService;
 
 
-
     @RequestMapping("list")
     public List<SysUser> list() {
         return syuService.selectAll();
@@ -30,10 +29,14 @@ public class SysUserController {
 
     @RequestMapping("selectByCondition")
     public PageInfo<SysUser> selectByCondition(@RequestBody Map<String, Object> map) {
-        System.out.println(map+"1111111111111111111111111111");
+
         PageInfo<SysUser> sysUserPageInfo = syuService.selectByCondition(map);
         return sysUserPageInfo;
     }
 
+    @RequestMapping("selectNotRole")
+    public List<SysUser> selectNotRole(Long offId) {
+        return syuService.selectNotRole(offId);
+    }
 
 }

@@ -14,7 +14,7 @@ public class SysRoleMapperPrvoider {
                 " sr.office_id=so.id " +
                 " where sr.del_flag=0");
         if (params.containsKey("offId") && !StringUtils.isEmpty(params.get("offId"))) {
-            sb.append(" and so.name=#{offId}");
+            sb.append(" and so.id=#{offId}");
         }
         if (params.containsKey("roleType") && !StringUtils.isEmpty(params.get("roleType"))) {
             sb.append(" and sr.data_scope=#{roleType} ");

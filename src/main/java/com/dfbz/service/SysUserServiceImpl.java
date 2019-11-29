@@ -35,4 +35,9 @@ public class SysUserServiceImpl extends tservisceIpm<SysUser> implements SysUser
         PageInfo<SysUser> pageInfo = new PageInfo<>(sysUsers);
         return pageInfo;
     }
+
+    @Override
+    public List<SysUser> selectNotRole(Long offId) {
+        return sysUserMapper.selectNotRole(offId);
+    }
 }

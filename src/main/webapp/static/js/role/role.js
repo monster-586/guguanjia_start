@@ -13,7 +13,7 @@ let em = new Vue({
             },
             pageInfo: {
                 pageNum: 1,
-                pageSize:5
+                pageSize: 5
             },
             setting: {
                 data: {
@@ -26,32 +26,33 @@ let em = new Vue({
                     }
                 },
                 callback: {onClick: this.TreeClick},
-
+                view: {fontCss: this.changeColor}
             },
             nodes: [],
             treeObj: {},
-            name:""
+            name: ""
         }
     },
     methods: {
         selectByCondition: function (pageNum, pageSize) {
             this.map.pageNum = pageNum;
             this.map.pageSize = pageSize;
+            console.log(this.map);
             axios({
                 url: "manager/role/selectByCondition",
-                method: "post",
+                method: 'post',
                 data: this.map
 
             }).then(response => {
                 this.pageInfo = response.data;
-                // this.map.officeId='';
+                this.map.offId = '';
             }).catch(function (error) {
                 console.log(error);
             })
         },
         initTree: function () {
             axios({
-                url: "manager/role/list",
+                url: "manager/office/list",
                 method: 'get',
                 params: ''
             }).then(response => {
@@ -66,37 +67,32 @@ let em = new Vue({
             })
         },
         TreeClick: function (event, treeId, treeNode) {
-            this.name=treeNode.name;
-            this.map.offId=treeNode.id;
+            this.name = treeNode.name;
+            this.map.offId = treeNode.id;
         },
-        // toSave: function (uid) {
-        //     this.map.userId=uid;
-        //     axios({
-        //         url: 'manager/sysuser/selectByCondition',
-        //         method: "post",
-        //         data: this.map
-        //     }).then(response => {
-        //         layer.areaSave = response.data;
-        //         console.log(response.data);
-        //         let _this = this;
-        //         let upd = layer.open({
-        //             type: 2,
-        //             title: "修改",
-        //             content: 'html/user/detail.html',
-        //             area: ['80%', '80%'],
-        //             end: () => {
-        //                 console.log("**********");
-        //                 this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize);
-        //             }
-        //         });
-        //     }).catch(function (error) {
-        //         layer.msg(error)
-        //     })
-        //
-        //
-        // },
+        toSave: function () {
+            axios({
+                url: 'manager/office/list',
+            }).then(response => {
+                layer.role_user= response.data;
+                // console.log(response.data)
+                let rol = layer.open({
+                    type: 2,
+                    title: "修改",
+                    content: 'html/role/role-user.html',
+                    area: ['80%', '80%'],
+                    end: () => {
+                        console.log("**********");
+                        // this.selectByCondition(this.pageInfo.pageNum, this.pageInfo.pageSize);
+                    }
+                });
+            }).catch(function (error) {
+                console.log(error)
+            })
+
+
+        },
         searchClear: function () {
-            console.log("aaaa");
 
             let nodeArr = this.treeObj.transformToArray(this.treeObj.getNodes());
 
@@ -130,7 +126,6 @@ let em = new Vue({
         changeColor: function (treeId, treeNode) {
             return treeNode.higtLine ? {color: "red"} : {color: ''}
         }
-
 
 
     },

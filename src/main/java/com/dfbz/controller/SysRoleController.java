@@ -28,6 +28,7 @@ public class SysRoleController {
 
     @RequestMapping("selectByCondition")
     public PageInfo<SysRole> selectByCondition(@RequestBody Map<String, Object> map) {
+        System.out.println(map);
         PageInfo<SysRole> pageInfo = sysRoleService.selectByCondition(map);
         System.out.println(pageInfo);
         return pageInfo;

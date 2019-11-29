@@ -19,4 +19,19 @@ public interface SysUserMapper extends Mapper<SysUser> {
     })
     List<SysUser> selectByCondition(Map<String, Object> params);
 
+    
+    @Select(" select *  " +
+            " from sys_user su " +
+            " where " +
+            " su.office_id=#{offId} " +
+            " and su.id  " +
+            " not in " +
+            " (select sur.user_id " +
+            " from sys_user_role sur " +
+            " left join  " +
+            " sys_role sr on " +
+            " sur.role_id=sr.id " +
+            " where " +
+            " sr.id=#{offId} )  ")
+    List<SysUser> selectNotRole(Long offId);
 }

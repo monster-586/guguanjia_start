@@ -132,10 +132,10 @@
 	                                                               	   <span id="pullDownTreeCurNameone">{{name==''?'全部':name}}</span> <i class="ace-icon fa fa-angle-down icon-on-right"></i>
 	                                                               </span>
 
-																		<div class="dropdown-menu dropdown-caret scrollable width-100" data-height="250">
+																		<div class="dropdown-menu dropdown-caret scrollable width-100" data-height="250" @mouseleave="searchClear">
 																			<div class="padding-15">
 																				<div style="padding-bottom: 10px;">
-																					<input type="text" id="pullDownTreeSearchone" placeholder="搜索" class="width-100" @keydown="search" v-model="name"/>
+																					<input type="text" id="pullDownTreeSearchone" placeholder="搜索" class="width-100" @keydown.enter="search" v-model="name"/>
 																				</div>
 																				<ul class="ztree" id="pullDownTreeone">
 
@@ -144,9 +144,6 @@
 																			</div>
 																		</div>
 																	</div>
-																	<input type="hidden" name="officeId" value="0" id="pullDownTreeCurIdone"/>
-																	<input type="hidden" name="" value="" id="pullDownTreeCurPidone"/>
-																	<input type="hidden" name="" value="" id="pullDownTreeCurCidone"/>
 																</div>
 															</div>
 															<div class="row padding-tb-10">
@@ -199,26 +196,21 @@
 												</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="pink" href="role-user.html"
-														   data-mode="page" data-title="<测试运输方普通人员>角色分配"
-														   data-url="role/binduser"
-														   data-data="{id:'27'}"
+														<a class="pink" @click="toSave"
+														  data-title="<测试运输方普通人员>角色分配"
 														   data-height="600px" data-width="1000px"
 														>
 															<i class="ace-icon fa fa-users bigger-130"></i> 分配人员
 														</a>
-														<a class="green" href="role-save.html"
+														<a class="green"
 														   data-mode="page" data-title="<测试运输方普通人员>编辑"
-														   data-url="role/edit/showlayer"
-														   data-data="{id:'27'}"
 														   data-height="80%" data-width="50%">
 															<i class="ace-icon fa fa-pencil bigger-130"></i> 编辑
 														</a>
 
-														<a class="red" href="javascript:void(0);"
+														<a class="red"
 														   data-mode="del" data-title="删除操作"
 														   data-msg="你确定删除此数据吗?"
-														   data-url="role/delete" data-data="{id:'27'}"
 														>
 															<i class="ace-icon fa fa-trash-o bigger-130"></i> 删除
 														</a>
@@ -625,7 +617,7 @@
 	$(function(){
 		$("#navbar").load("html/commons/navbar.html");
 		$("#sidebar").load("html/commons/sidebar.html");
-		$("#ace-settings-container").load("html/commons/settingsContainer.html");
+		// $("#ace-settings-container").load("html/commons/settingsContainer.html");
 		$("#userDataScope").chosen({width: "80%",search_contains: true});
 		$("#saveUserDataScope").chosen({width: "50%",search_contains: true});
 	})
