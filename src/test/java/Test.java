@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -234,10 +235,30 @@ SysUserService sysUserService;
 
     @org.junit.Test
     public void NotRole(){
-        List<SysUser> sysUsers = sysUserService.selectNotRole(2L);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("roleId",1);
+        map.put("offId",56);
+        List<SysUser> sysUsers = sysUserService.selectNotRole(map);
         for (SysUser sysUser : sysUsers) {
             System.out.println(sysUser);
         }
+        List<SysUser> sysUsers1 = sysUserService.selectHaveRole(map);
+        for (SysUser sysUser : sysUsers1) {
+            System.out.println(sysUser);
+        }
+    }
+    @org.junit.Test
+    public void insertUser(){
+        List<Long> insertUserId = new ArrayList<>();
+        insertUserId.add(2l);
+        insertUserId.add(2l);
+        insertUserId.add(2l);
+        insertUserId.add(2l);
+        insertUserId.add(2l);
+        Long insertRoleId=1L;
+        sysRoleMapper.insertBatch(insertUserId,insertRoleId);
+
+
     }
 
 }

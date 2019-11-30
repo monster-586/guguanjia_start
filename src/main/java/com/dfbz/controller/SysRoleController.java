@@ -1,7 +1,6 @@
 package com.dfbz.controller;
 
 
-
 import com.dfbz.entity.SysRole;
 
 import com.dfbz.service.SysRoleService;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,18 +28,28 @@ public class SysRoleController {
 
     @RequestMapping("selectByCondition")
     public PageInfo<SysRole> selectByCondition(@RequestBody Map<String, Object> map) {
-        System.out.println(map);
+//        System.out.println(map);
         PageInfo<SysRole> pageInfo = sysRoleService.selectByCondition(map);
-        System.out.println(pageInfo);
+//        System.out.println(pageInfo);
         return pageInfo;
     }
 
     @RequestMapping("list")
-    public List<SysRole> SelectALL(){
+    public List<SysRole> SelectALL() {
         List<SysRole> sysRoles = sysRoleService.selectAll();
         return sysRoles;
     }
 
+    @RequestMapping("insertBatch")
+    public void insertBatch(@RequestBody Map<String, Object> params) {
+        Long insertRoleId = (Long) params.get("insertRoleId");
+        ArrayList<Long> longs = new ArrayList<>();
+        List<Long> removeUserId = (List<Long>) params.get("removeUserId");
+        for (Long removeUserId1 : removeUserId) {
+            longs.add(removeUserId1);
+        }
+        sysRoleService.insertBatch(longs, insertRoleId);
+    }
 //    @RequestMapping("selectOneById")
 //    public Area selectOneById(@RequestParam Long id) {
 ////        System.out.println("selectOneById" + id);

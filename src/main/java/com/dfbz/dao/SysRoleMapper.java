@@ -2,6 +2,7 @@ package com.dfbz.dao;
 
 
 import com.dfbz.entity.SysRole;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import tk.mybatis.mapper.common.Mapper;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 
 public interface SysRoleMapper extends Mapper<SysRole> {
-    
+
     @Select(" select sr.*" +
             " from sys_user su " +
             " left join  " +
@@ -24,6 +25,9 @@ public interface SysRoleMapper extends Mapper<SysRole> {
             " su.id=#{userId}")
     List<SysRole> selectRoleByUserId(Long userId);
 
-@SelectProvider(type = SysRoleMapperPrvoider.class,method = "selectByCondition")
+    @SelectProvider(type = SysRoleMapperPrvoider.class, method = "selectByCondition")
     List<SysRole> selectByCondition(Map<String, Object> params);
+
+    @SelectProvider(type = SysRoleMapperPrvoider.class, method = "insertBatch")
+    void insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("insertRoleId") long insertRoleId);
 }

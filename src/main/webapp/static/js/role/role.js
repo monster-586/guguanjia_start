@@ -70,12 +70,13 @@ let em = new Vue({
             this.name = treeNode.name;
             this.map.offId = treeNode.id;
         },
-        toSave: function () {
+        toSave: function (roleId) {
             axios({
                 url: 'manager/office/list',
             }).then(response => {
-                layer.role_user= response.data;
-                // console.log(response.data)
+                layer.role_user = response.data;
+                layer.roleId = roleId;
+                console.log(layer.roleId)
                 let rol = layer.open({
                     type: 2,
                     title: "修改",

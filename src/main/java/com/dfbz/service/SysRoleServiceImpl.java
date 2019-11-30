@@ -25,10 +25,10 @@ public class SysRoleServiceImpl extends tservisceIpm<SysRole> implements SysRole
 
     @Override
     public PageInfo<SysRole> selectByCondition(Map<String, Object> map) {
-        if (!map.containsKey("pageNum")||StringUtils.isEmpty(map.get("pageNum"))) {
+        if (!map.containsKey("pageNum") || StringUtils.isEmpty(map.get("pageNum"))) {
             map.put("pageNum", 1);
         }
-        if (!map.containsKey("pageSize")||StringUtils.isEmpty(map.get("pageSize"))) {
+        if (!map.containsKey("pageSize") || StringUtils.isEmpty(map.get("pageSize"))) {
             map.put("pageSize", 5);
         }
         PageHelper.startPage((Integer) map.get("pageNum"), (Integer) map.get("pageSize"));
@@ -36,5 +36,10 @@ public class SysRoleServiceImpl extends tservisceIpm<SysRole> implements SysRole
         List<SysRole> sysRole = sysRoleMapper.selectByCondition(map);
         PageInfo<SysRole> pageInfo = new PageInfo<>(sysRole);
         return pageInfo;
+    }
+
+    @Override
+    public void insertBatch(List<Long> insertUserId, long insertRoleId) {
+        sysRoleMapper.insertBatch(insertUserId, insertRoleId);
     }
 }

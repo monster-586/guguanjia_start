@@ -49,7 +49,7 @@ public class AppVersionContorller {
         appVersion.setDelFlag("1");
         Date date = new Date();
         appVersion.setCreateDate(date);
-        System.out.println(date);
+//        System.out.println(date);
         int i = appVersionService.updateByPrimaryKeySelective(appVersion);
         String mag = "操作失败";
         if (i > 0) {
@@ -64,7 +64,7 @@ public class AppVersionContorller {
         appVersion.setDelFlag("0");
         appVersion.setUpdateDate(new Date());
         appVersion.setCreateDate(new Date());
-        System.out.println(appVersion);
+//        System.out.println(appVersion);
         int i = appVersionService.insertSelective(appVersion);
         String mag = "操作失败";
         if (i > 0) {

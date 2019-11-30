@@ -2,8 +2,18 @@ let em = new Vue({
     el: '#main-container',
     data: function () {
         return {
-            map: {},
-            role_user: {},
+            map: {
+                offId: '',/*查询dxUser和yxUser的office ID*/
+                roleId: '',/*查询dxUser和yxUser的role ID*/
+                insertUserId: [],/*批量插入权限的userId*/
+                removeUserId: [],/*批量移除权限的userId*/
+            },
+            dxUser: {},/*待选user*/
+            yxUser: {},/*已选user*/
+
+
+            haveUserClass: 'hidden',
+            notUserClass: 'hidden',
             setting: {
                 data: {
                     key: {
@@ -17,10 +27,10 @@ let em = new Vue({
                 callback: {onClick: this.TreeClick},
                 view: {fontCss: this.changeColor}
             },
-            nodes: [],
-            treeObj: {},
-            name: "",
-            
+            nodes: [],  /*公司节点*/
+            treeObj: {},/*树对象*/
+            name: "",/*节点名字*/
+
         }
     },
     methods: {
@@ -32,6 +42,11 @@ let em = new Vue({
         },
         TreeClick: function (event, treeId, treeNode) {
             this.searchClear();
+            this.map.offId = treeNode.id;
+            console.log(this.map)
+            this.notRoleUser();
+            this.haveRoleUser();
+
 
         },
         searchClear: function () {
@@ -68,29 +83,86 @@ let em = new Vue({
             return treeNode.higtLine ? {color: "red"} : {color: ''}
         },
 
-        yxUser:function(){//根据当前角色id，查询后台，得到当前角色已经授权的用户id和name
+        notRoleUser: function () {//根据当前角色id，查询出相应role的user，
             axios({
-                url:'manager/sysuser/selectNotRole',
-                params:{rid:this.rid}
+                url: 'manager/sysuser/selectNotRole',
+                method: 'post',
+                data: this.map
             }).then(response => {
-                this.checkedUser=response.data;
-
+                this.dxUser = response.data;
                 //给每个用户绑定新属性show ,用于控制被选中与否
-                for (let i = 0; i <this.checkedUser.length ; i++) {
-                    this.checkedUser[i].show=false;
+                for (let i = 0; i < this.dxUser.length; i++) {
+                    this.dxUser[i].show = false;
                 }
-
 
             }).catch(function (error) {
                 layer.msg(error);
             })
         },
+        haveRoleUser: function () {//根据当前角色id，查询出相应role的user，
+            axios({
+                url: 'manager/sysuser/selectHaveRole',
+                method: 'post',
+                data: this.map
+            }).then(response => {
+                this.yxUser = response.data;
+                //给每个用户绑定新属性show ,用于控制被选中与否
+                for (let i = 0; i < this.dxUser.length; i++) {
+                    this.yxUser[i].show = false;
+                }
 
+            }).catch(function (error) {
+                layer.msg(error);
+            })
+        },
+        selectToRemove: function (id) {//改动被选中的赋值
+            this.removeUserId = [];
+            this.haveUserClass = 'hidden'
+            for (let i = 0; i < this.yxUser.length; i++) {
+                if (this.yxUser[i].id == id) {
+                    this.yxUser[i].show = !this.yxUser[i].show;
+                }
+                if (this.yxUser[i].show == true) {
+                    this.removeUserId.push(this.yxUser[i].id);//将找到的需要操作的人员的id放入uids中
+                }
+            }
+            console.log(this.removeUserId);
+            if (this.removeUserId.length > 0) {
+                this.haveUserClass = 'show';
+            }
+
+
+        },
+        selectToInsert: function (id) {//改动被选中的赋值
+            this.insertUserId = [];
+            this.notUserClass = 'hidden'
+            for (let i = 0; i < this.dxUser.length; i++) {
+                if (this.dxUser[i].id == id) {
+                    this.dxUser[i].show = !this.dxUser[i].show;
+                }
+                if (this.dxUser[i].show == true) {
+                    this.insertUserId.push(this.dxUser[i].id);//将找到的需要操作的人员的id放入uids中
+                }
+            }
+            console.log(this.insertUserId);
+            if (this.insertUserId.length > 0) {
+                this.notUserClass = 'show';
+            }
+        },
+        insertBatch: function () {
+
+        },
+        removeBatch: function () {
+
+        }
 
     },
 
     created: function () {
         this.nodes = parent.layer.role_user;
+        this.insertRoleId=parent.layer.roleId;
+        this.map.roleId = parent.layer.roleId;
+        this.haveRoleUser();
 
     },
     mounted: function () {

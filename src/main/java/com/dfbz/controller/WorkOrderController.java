@@ -22,9 +22,9 @@ public class WorkOrderController {
 
     @RequestMapping("selectByCondition")
     public PageInfo<WorkOrder> selectByCondition(@RequestBody Map<String, Object> map) {
-        System.out.println(map);
+//        System.out.println(map);
         PageInfo<WorkOrder> workOrderPageInfo = worService.selectByCondition(map);
-        System.out.println(workOrderPageInfo);
+//        System.out.println(workOrderPageInfo);
         return workOrderPageInfo;
     }
     @RequestMapping("selectAll")

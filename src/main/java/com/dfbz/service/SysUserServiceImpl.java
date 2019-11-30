@@ -37,7 +37,14 @@ public class SysUserServiceImpl extends tservisceIpm<SysUser> implements SysUser
     }
 
     @Override
-    public List<SysUser> selectNotRole(Long offId) {
-        return sysUserMapper.selectNotRole(offId);
+    public List<SysUser> selectNotRole(Map<String, Object> params) {
+        return sysUserMapper.selectNotRole(params);
     }
+
+    @Override
+    public List<SysUser> selectHaveRole(Map<String, Object> params) {
+        return sysUserMapper.selectHaveRole(params);
+    }
+
+
 }

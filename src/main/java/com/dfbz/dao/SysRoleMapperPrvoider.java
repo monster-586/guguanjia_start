@@ -1,7 +1,9 @@
 package com.dfbz.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 public class SysRoleMapperPrvoider {
@@ -29,6 +31,17 @@ public class SysRoleMapperPrvoider {
         return sb.toString();
 
 
+    }
+    public String insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("insertRoleId") long insertRoleId){
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO `sys_user_role`( `role_id`, `user_id`, `create_by`, `create_date`, " +
+                "`update_by`, `update_date`, `del_flag`) VALUES ");
+
+        for (int i = 0; i < insertUserId.size(); i++) {
+            sb.append("(#{insertRoleId},#{insertUserId["+i+"]},null,now(),null,now(),0),");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
     }
 
 }

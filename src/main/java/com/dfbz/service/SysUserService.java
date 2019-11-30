@@ -12,7 +12,8 @@ public interface SysUserService extends tservice<SysUser> {
 
   PageInfo< SysUser> selectByCondition(Map<String, Object> map);
 
-  List<SysUser> selectNotRole(Long offId);
+  List<SysUser> selectNotRole(Map<String, Object> params);
 
+  List<SysUser> selectHaveRole(Map<String, Object> params);
 
 }

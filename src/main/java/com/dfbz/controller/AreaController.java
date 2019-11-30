@@ -45,10 +45,10 @@ public class AreaController {
     public Area selectOneById(@RequestParam Long id) {
 //        System.out.println("selectOneById" + id);
         Area area = areaService.selectOneById(id);
-        System.out.println("befor" + area);
+//        System.out.println("befor" + area);
         area.setOldparentIds(area.getParentIds());
         area.setOdlparentId(area.getParentId());
-        System.out.println("afet" + area);
+//        System.out.println("afet" + area);
 
         return area;
     }
@@ -70,10 +70,10 @@ public class AreaController {
     @RequestMapping(value = "update", produces = "html/text;charset=utf-8")
     public String insertSelective(@RequestBody Area area) {
         String msg = "操作失败";
-        System.out.println("in" + area);
+//        System.out.println("in" + area);
         int i = areaService.updateOne(area);
         Area area1 = areaService.selectOneById(area.getId());
-        System.out.println("one" + area1);
+//        System.out.println("one" + area1);
         if (i > 0) {
             int j = areaService.updateAllParentIds(area1);
             System.out.println("all" + area1);

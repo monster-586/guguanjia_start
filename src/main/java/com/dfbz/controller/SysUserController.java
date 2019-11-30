@@ -35,8 +35,24 @@ public class SysUserController {
     }
 
     @RequestMapping("selectNotRole")
-    public List<SysUser> selectNotRole(Long offId) {
-        return syuService.selectNotRole(offId);
+    public List<SysUser> selectNotRole(@RequestBody Map<String, Object> params) {
+//        System.out.println("*****************"+params);
+        List<SysUser> sysUsers = syuService.selectNotRole(params);
+//        for (SysUser sysUser : sysUsers) {
+//            System.out.println("dx"+sysUser);
+//        }
+        return sysUsers;
     }
+
+    @RequestMapping("selectHaveRole")
+    public List<SysUser> selectHaveRole(@RequestBody Map<String, Object> params){
+        List<SysUser> sysUsers = syuService.selectHaveRole(params);
+        for (SysUser sysUser : sysUsers) {
+            System.out.println("yx"+sysUser);
+        }
+        return sysUsers;
+    }
+
+
 
 }
