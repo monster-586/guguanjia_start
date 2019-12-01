@@ -12,7 +12,10 @@ public interface SysRoleService {
 
     PageInfo<SysRole> selectByCondition(Map<String, Object> map);
 
-    List< SysRole> selectAll();
+    List<SysRole> selectAll();
 
-    void insertBatch( List<Long> insertUserId, long insertRoleId);
+    int insertBatch(List<Long> insertUserId, long insertRoleId);
+
+    int deleteByRoleAndUser(Long roleId, Long removeUserId);
 }
+

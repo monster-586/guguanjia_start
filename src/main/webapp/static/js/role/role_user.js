@@ -116,51 +116,69 @@ let em = new Vue({
             })
         },
         selectToRemove: function (id) {//改动被选中的赋值
-            this.removeUserId = [];
+            this.map.removeUserId = [];
             this.haveUserClass = 'hidden'
             for (let i = 0; i < this.yxUser.length; i++) {
                 if (this.yxUser[i].id == id) {
                     this.yxUser[i].show = !this.yxUser[i].show;
                 }
                 if (this.yxUser[i].show == true) {
-                    this.removeUserId.push(this.yxUser[i].id);//将找到的需要操作的人员的id放入uids中
+                    this.map.removeUserId.push(this.yxUser[i].id);//将找到的需要操作的人员的id放入uids中
                 }
             }
-            console.log(this.removeUserId);
-            if (this.removeUserId.length > 0) {
+            console.log(this.map.removeUserId);
+            if (this.map.removeUserId.length > 0) {
                 this.haveUserClass = 'show';
             }
 
 
         },
         selectToInsert: function (id) {//改动被选中的赋值
-            this.insertUserId = [];
+            this.map.insertUserId = [];
             this.notUserClass = 'hidden'
             for (let i = 0; i < this.dxUser.length; i++) {
                 if (this.dxUser[i].id == id) {
                     this.dxUser[i].show = !this.dxUser[i].show;
                 }
                 if (this.dxUser[i].show == true) {
-                    this.insertUserId.push(this.dxUser[i].id);//将找到的需要操作的人员的id放入uids中
+                    this.map.insertUserId.push(this.dxUser[i].id);//将找到的需要操作的人员的id放入uids中
                 }
             }
-            console.log(this.insertUserId);
-            if (this.insertUserId.length > 0) {
+            console.log(this.map.insertUserId);
+            if (this.map.insertUserId.length > 0) {
                 this.notUserClass = 'show';
             }
         },
         insertBatch: function () {
-
+            console.log(this.map)
+            axios({
+                url: 'manager/role/insertBatch',
+                method: 'post',
+                data: this.map
+            }).then(response => {
+                console.log(response.data)
+            }).catch(function (error) {
+                layer.msg(error);
+            })
         },
-        removeBatch: function () {
 
+        removeBatch: function () {
+            axios({
+                url: 'manager/role/deleteBatch',
+                method: 'post',
+                data: this.map
+            }).then(response => {
+                console.log(response.data)
+            }).catch(function (error) {
+                layer.msg(error);
+            })
         }
 
     },
 
     created: function () {
         this.nodes = parent.layer.role_user;
-        this.insertRoleId=parent.layer.roleId;
+        this.insertRoleId = parent.layer.roleId;
         this.map.roleId = parent.layer.roleId;
         this.haveRoleUser();
 

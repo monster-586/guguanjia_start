@@ -83,7 +83,7 @@
 												<span class="lbl"> {{obj.name}}</span>
 											</label>
 										</div>
-										<div :class="notUserClass" id="addUserBtn">
+										<div :class="notUserClass" id="addUserBtn" @click="insertBatch">
 											<a  class="btn btn-block btn-primary">
 												<i class="ace-icon fa fa-plus bigger-110"></i>
 												<span>添加授权</span>
@@ -110,7 +110,7 @@
 												</div>
 											</div>
 										</form>
-										<div  :class="haveUserClass" id="removeUserBtn">
+										<div  :class="haveUserClass" id="removeUserBtn" @click="removeBatch">
 											<a  class="btn btn-block btn-success">
 												<i class="ace-icon fa fa-trash bigger-110"></i>
 												<span>移除授权</span>

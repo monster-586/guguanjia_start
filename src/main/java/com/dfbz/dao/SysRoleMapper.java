@@ -2,9 +2,7 @@ package com.dfbz.dao;
 
 
 import com.dfbz.entity.SysRole;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -28,6 +26,12 @@ public interface SysRoleMapper extends Mapper<SysRole> {
     @SelectProvider(type = SysRoleMapperPrvoider.class, method = "selectByCondition")
     List<SysRole> selectByCondition(Map<String, Object> params);
 
-    @SelectProvider(type = SysRoleMapperPrvoider.class, method = "insertBatch")
-    void insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("insertRoleId") long insertRoleId);
+    @InsertProvider(type = SysRoleMapperPrvoider.class, method = "insertBatch")
+    int insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("roleId") long roleId);
+
+    @Delete(" delete from " +
+            " sys_user_role " +
+            " where user_id=#{removeUserId} " +
+            " and role_id=#{roleId} ")
+    int deleteByRoleAndUser(@Param("roleId") Long roleId, @Param("removeUserId") Long removeUserId);
 }

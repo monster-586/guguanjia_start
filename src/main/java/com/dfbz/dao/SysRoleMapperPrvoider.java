@@ -32,13 +32,13 @@ public class SysRoleMapperPrvoider {
 
 
     }
-    public String insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("insertRoleId") long insertRoleId){
+    public String insertBatch(@Param("insertUserId") List<Long> insertUserId, @Param("roleId") long roleId){
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO `sys_user_role`( `role_id`, `user_id`, `create_by`, `create_date`, " +
                 "`update_by`, `update_date`, `del_flag`) VALUES ");
 
         for (int i = 0; i < insertUserId.size(); i++) {
-            sb.append("(#{insertRoleId},#{insertUserId["+i+"]},null,now(),null,now(),0),");
+            sb.append("(#{roleId},#{insertUserId["+i+"]},null,now(),null,now(),0),");
         }
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();

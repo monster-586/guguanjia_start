@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +25,6 @@ public class SysRoleController {
 
     @RequestMapping("selectByCondition")
     public PageInfo<SysRole> selectByCondition(@RequestBody Map<String, Object> map) {
-//        System.out.println(map);
         PageInfo<SysRole> pageInfo = sysRoleService.selectByCondition(map);
 //        System.out.println(pageInfo);
         return pageInfo;
@@ -40,29 +36,39 @@ public class SysRoleController {
         return sysRoles;
     }
 
-    @RequestMapping("insertBatch")
-    public void insertBatch(@RequestBody Map<String, Object> params) {
-        Long insertRoleId = (Long) params.get("insertRoleId");
-        ArrayList<Long> longs = new ArrayList<>();
-        List<Long> removeUserId = (List<Long>) params.get("removeUserId");
-        for (Long removeUserId1 : removeUserId) {
-            longs.add(removeUserId1);
+    @RequestMapping(value = "insertBatch",produces = "html/text;charset=utf-8")
+    public String insertBatch(@RequestBody Map<String, Object> params) {
+
+        int roleId = (int) params.get("roleId");
+        ArrayList<Long> insertUserId = new ArrayList<>();
+        List<Integer> list = (List<Integer>) params.get("insertUserId");
+        for (Integer integer : list) {
+            insertUserId.add(Long.valueOf(integer));
         }
-        sysRoleService.insertBatch(longs, insertRoleId);
+
+        String msg="操作失败";
+        int i = sysRoleService.insertBatch(insertUserId, roleId);
+        if(i>0){
+            msg="操作成功";
+        }
+        return msg;
     }
-//    @RequestMapping("selectOneById")
-//    public Area selectOneById(@RequestParam Long id) {
-////        System.out.println("selectOneById" + id);
-//        Area area = areaService.selectOneById(id);
-//        System.out.println("befor" + area);
-//        area.setOldparentIds(area.getParentIds());
-//        area.setOdlparentId(area.getParentId());
-//        System.out.println("afet" + area);
-//
-//        return area;
-//    }
-//
-//
+    @RequestMapping(value = "deleteBatch",produces = "html/text;charset=utf-8")
+    public String deleteByRoleAndUser(@RequestBody Map<String, Object> params){
+
+        int roleId = (int) params.get("roleId");
+        int i=0;
+        List<Integer> list = (List<Integer>) params.get("removeUserId");
+        for (Integer intlist : list) {
+          i = sysRoleService.deleteByRoleAndUser((long) roleId, Long.valueOf(intlist));
+        }
+        String msg="操作失败";
+        if(i>0){
+            msg="操作成功";
+        }
+        return msg;
+    }
+
 //    @RequestMapping(value = "update", produces = "html/text;charset=utf-8")
 //    public String insertSelective(@RequestBody Area area) {
 //        String msg = "操作失败";

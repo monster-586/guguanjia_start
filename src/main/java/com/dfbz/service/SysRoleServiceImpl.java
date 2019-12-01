@@ -39,7 +39,13 @@ public class SysRoleServiceImpl extends tservisceIpm<SysRole> implements SysRole
     }
 
     @Override
-    public void insertBatch(List<Long> insertUserId, long insertRoleId) {
-        sysRoleMapper.insertBatch(insertUserId, insertRoleId);
+    public int insertBatch(List<Long> insertUserId, long insertRoleId) {
+        int i = sysRoleMapper.insertBatch(insertUserId, insertRoleId);
+        return i;
+    }
+
+    @Override
+    public int deleteByRoleAndUser(Long roleId, Long removeUserId) {
+        return sysRoleMapper.deleteByRoleAndUser(roleId,removeUserId);
     }
 }

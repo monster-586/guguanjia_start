@@ -223,12 +223,14 @@ SysUserService sysUserService;
     }
 
     @Autowired
-    SysRoleService sysRoleMapper;
+    SysRoleMapper sysRoleMapper;
+    @Autowired
+    SysRoleService sysRoleService;
     @org.junit.Test
     public void TestRole(){
         HashMap<String, Object> map = new HashMap<>();
         map.put("roleId",2);
-        PageInfo<SysRole> sysRolePageInfo = sysRoleMapper.selectByCondition(map);
+        PageInfo<SysRole> sysRolePageInfo = sysRoleService.selectByCondition(map);
         System.out.println(sysRolePageInfo);
 
     }
@@ -248,7 +250,7 @@ SysUserService sysUserService;
         }
     }
     @org.junit.Test
-    public void insertUser(){
+    public void insertRoleUser(){
         List<Long> insertUserId = new ArrayList<>();
         insertUserId.add(2l);
         insertUserId.add(2l);
@@ -256,9 +258,12 @@ SysUserService sysUserService;
         insertUserId.add(2l);
         insertUserId.add(2l);
         Long insertRoleId=1L;
-        sysRoleMapper.insertBatch(insertUserId,insertRoleId);
-
+       int i =sysRoleService.insertBatch(insertUserId,insertRoleId);
 
     }
-
+    @org.junit.Test
+    public void deleteRoleUser(){
+        int i = sysRoleMapper.deleteByRoleAndUser(1L, 2L);
+    }
 }
+
