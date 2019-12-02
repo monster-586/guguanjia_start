@@ -132,7 +132,7 @@ let em = new Vue({
         toSave: function (obj) {
             // this.checkRole = obj;
             axios({
-                url: 'manager/resource/list',
+                url: 'manager/resource/selectByRid',
                 method: 'get',
                 params: {
                     rid: obj.id

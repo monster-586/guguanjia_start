@@ -8,11 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
-public interface SysRoleService {
+public interface SysRoleService extends tservice<SysRole>{
 
     PageInfo<SysRole> selectByCondition(Map<String, Object> map);
-
-    List<SysRole> selectAll();
 
     int insertBatch(List<Long> insertUserId, long insertRoleId);
 

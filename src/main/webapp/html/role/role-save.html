@@ -74,12 +74,12 @@
 									</tr>
 									<tr class="FormData">
 										<td class="CaptionTD">角色名称</td>
-										<td class="DataTD width-100"><input type="text" name="name" datatype="*" nullmsg="请输入角色名称！" v-model="Role.name"></td>
+										<td class="DataTD width-100"><input type="text" name="name" readonly="" datatype="*" v-model="Role.name"></td>
 									</tr>
 									<tr class="FormData">
 										<td class="CaptionTD">数据范围</td>
 										<td class="DataTD width-100">
-											<select class="chosen-select " name="dataScope" id="chosenSelectEdit"  v-model="Role.dataScope" style="display: none;">
+											<select class="chosen-select " name="dataScope" id="chosenSelectEdit"  v-model="Role.dataScope" >
 												<option value="1">所有数据</option>
 												<option value="2">所在公司及以下数据</option>
 												<option value="3">所在公司数据</option>
@@ -108,7 +108,7 @@
 												</div>
 
 
-												<div id="treeSelectOfficeEdit" style="width: 50%; display: none; vertical-align: top; float: right;">
+												<div id="treeSelectOfficeEdit" style="width: 50%;  vertical-align: top; float: right;">
 
 													<div>
 														<ul id="select-treetreeSelectOfficeEdit" class="ztree" style="padding:15px 20px;">

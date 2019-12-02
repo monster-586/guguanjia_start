@@ -21,6 +21,7 @@ public class SysOfficeController {
     @RequestMapping("list")
     public List<SysOffice> list (){
         return sysService.selectAll();
+
     }
 
 

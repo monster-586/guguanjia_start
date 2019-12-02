@@ -266,5 +266,14 @@ SysUserService sysUserService;
     public void deleteRoleUser(){
         int i = sysRoleMapper.deleteByRoleAndUser(1L, 2L);
     }
+    @Autowired
+    SysResourceService resourceService;
+    @org.junit.Test
+    public void selectAllRole(){
+        List<SysResource> sys_resources = resourceService.selectAll();
+        for (SysResource sys_resource : sys_resources) {
+            System.out.println(sys_resource);
+        }
+    }
 }
 
