@@ -5,6 +5,7 @@ import com.dfbz.entity.SysRole;
 
 import com.dfbz.service.SysRoleService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,22 +70,7 @@ public class SysRoleController {
         return msg;
     }
 
-//    @RequestMapping(value = "update", produces = "html/text;charset=utf-8")
-//    public String insertSelective(@RequestBody Area area) {
-//        String msg = "操作失败";
-//        System.out.println("in" + area);
-//        int i = areaService.updateOne(area);
-//        Area area1 = areaService.selectOneById(area.getId());
-//        System.out.println("one" + area1);
-//        if (i > 0) {
-//            int j = areaService.updateAllParentIds(area1);
-//            System.out.println("all" + area1);
-//            if (j > 0) {
-//                msg = "操作失败";
-//            }
-//        }
-//        return msg;
-//    }
+
 
 
 }

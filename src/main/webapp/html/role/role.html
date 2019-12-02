@@ -108,12 +108,12 @@
 											<div class="widget-body">
 												<div class="widget-body-inner" >
 													<div class="widget-main">
-														<form action="role/list" method="post" id="search-form"
+														<form  id="search-form"
 															  target="list-page" class="center clearfix">
 															<div class="row padding-tb-10">
 																<div class="col-sm-6">
 																	<label class="inline">数据范围：</label>
-																	<select class="chosen-select " name="dataScope" id="userDataScope" v-model="map.type">
+																	<select  name="dataScope" id="userDataScope" v-model="map.roleType">
 																		<option value="">全部</option>
 																		<option value="1">所有数据</option>
 																		<option value="2">所在公司及以下数据</option>
@@ -182,8 +182,7 @@
 											<tbody>
 											<tr v-for="obj in pageInfo.list">
 												<td class="center">
-													<a href="role-detail.html"
-													   data-mode="detail" data-title="<测试运输方普通人员>角色"
+													<a data-mode="detail" data-title="<测试运输方普通人员>角色"
 													   data-url="role/detail/showlayer"
 													   data-data="{id:'27'}"
 													>{{obj.name}}</a>
@@ -196,15 +195,14 @@
 												</td>
 												<td class="center">
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="pink" @click="toSave(obj.id)"
+														<a class="pink" @click="toManager(obj.id)"
 														  data-title="<测试运输方普通人员>角色分配"
 														   data-height="600px" data-width="1000px"
 														>
 															<i class="ace-icon fa fa-users bigger-130"></i> 分配人员
 														</a>
 														<a class="green"
-														   data-mode="page" data-title="<测试运输方普通人员>编辑"
-														   data-height="80%" data-width="50%">
+                                                           @click="toSave(obj)">
 															<i class="ace-icon fa fa-pencil bigger-130"></i> 编辑
 														</a>
 

@@ -82,7 +82,6 @@ let em = new Vue({
         changeColor: function (treeId, treeNode) {
             return treeNode.higtLine ? {color: "red"} : {color: ''}
         },
-
         notRoleUser: function () {//根据当前角色id，查询出相应role的user，
             axios({
                 url: 'manager/sysuser/selectNotRole',
@@ -161,7 +160,6 @@ let em = new Vue({
                 layer.msg(error);
             })
         },
-
         removeBatch: function () {
             axios({
                 url: 'manager/role/deleteBatch',

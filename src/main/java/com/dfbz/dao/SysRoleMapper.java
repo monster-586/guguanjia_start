@@ -34,4 +34,6 @@ public interface SysRoleMapper extends Mapper<SysRole> {
             " where user_id=#{removeUserId} " +
             " and role_id=#{roleId} ")
     int deleteByRoleAndUser(@Param("roleId") Long roleId, @Param("removeUserId") Long removeUserId);
+
+
 }

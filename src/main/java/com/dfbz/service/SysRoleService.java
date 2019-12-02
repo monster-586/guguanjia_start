@@ -17,5 +17,7 @@ public interface SysRoleService {
     int insertBatch(List<Long> insertUserId, long insertRoleId);
 
     int deleteByRoleAndUser(Long roleId, Long removeUserId);
+
+
 }
 

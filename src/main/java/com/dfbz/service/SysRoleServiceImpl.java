@@ -48,4 +48,8 @@ public class SysRoleServiceImpl extends tservisceIpm<SysRole> implements SysRole
     public int deleteByRoleAndUser(Long roleId, Long removeUserId) {
         return sysRoleMapper.deleteByRoleAndUser(roleId,removeUserId);
     }
+
+
+
+
 }

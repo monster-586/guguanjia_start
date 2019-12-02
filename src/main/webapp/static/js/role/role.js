@@ -15,6 +15,11 @@ let em = new Vue({
                 pageNum: 1,
                 pageSize: 5
             },
+            nodes: [],
+            treeObj: {},
+            name: '',
+            // checkRole: '',
+            rid: '',
             setting: {
                 data: {
                     key: {
@@ -27,10 +32,8 @@ let em = new Vue({
                 },
                 callback: {onClick: this.TreeClick},
                 view: {fontCss: this.changeColor}
-            },
-            nodes: [],
-            treeObj: {},
-            name: ""
+            }
+
         }
     },
     methods: {
@@ -70,7 +73,7 @@ let em = new Vue({
             this.name = treeNode.name;
             this.map.offId = treeNode.id;
         },
-        toSave: function (roleId) {
+        toManager: function (roleId) {
             axios({
                 url: 'manager/office/list',
             }).then(response => {
@@ -101,8 +104,7 @@ let em = new Vue({
                 nodeArr[index].higtLine = false;
                 this.treeObj.updateNode(nodeArr[index]);//更新节点，自动调用清除css
             }
-        }
-        ,
+        },
         search: function () {
 
             console.log("bbbb")
@@ -126,9 +128,34 @@ let em = new Vue({
         },
         changeColor: function (treeId, treeNode) {
             return treeNode.higtLine ? {color: "red"} : {color: ''}
+        },
+        toSave: function (obj) {
+            // this.checkRole = obj;
+            axios({
+                url: 'manager/resource/list',
+                method: 'get',
+                params: {
+                    rid: obj.id
+                }
+            }).then(response => {
+                layer.Role = obj;
+                layer.roleList = response.data;
+                let vm = layer.open({
+                    type: 2,
+                    title: "编辑角色权限",
+                    content: 'html/role/role-save.html',
+                    area: ['80%', '80%'],
+                    end: () => {
+                        console.log("**********");
+                    }
+                })
+
+
+            }).catch(function (error) {
+
+            })
+
         }
-
-
     },
 
     created: function () {

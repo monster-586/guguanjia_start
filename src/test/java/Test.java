@@ -229,9 +229,10 @@ SysUserService sysUserService;
     @org.junit.Test
     public void TestRole(){
         HashMap<String, Object> map = new HashMap<>();
-        map.put("roleId",2);
+        map.put("offId",56);
+        map.put("roleName","超级管理员");
         PageInfo<SysRole> sysRolePageInfo = sysRoleService.selectByCondition(map);
-        System.out.println(sysRolePageInfo);
+        System.out.println(sysRolePageInfo.getList());
 
     }
 
