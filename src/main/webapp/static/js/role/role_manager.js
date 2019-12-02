@@ -1,31 +1,33 @@
 let em = new Vue({
     el: '#main-container',
-    data:function(){
+    data: function () {
         return {
             Role: {},
-            roleList: {},
-            setting:{
-                data:{
-                    key:{
-                        title:''
+            setting: {
+                data: {
+                    key: {
+                        title: ''
                     },
-                    simpleData:{
-                        enable:true
+                    simpleData: {
+                        enable: true,
+                        pIdKey: 'parentId'
                     }
                 },
-                callback:{},
-                view:{},
-                nodes:[]
+                callback: {},
+                view: {},
+                nodes: []
             }
         }
     },
-    methods:{
-
+    methods: {
+        initTree: function () {
+            let treeObject = $.fn.zTree.init($("#treeOffice"), this.setting, this.nodes);
+        }
     },
-    created:function (){
-        this.Role=parent.layer.Role;
-        this.roleList=parent.layer.roleList;
+    created: function () {
+        this.Role = parent.layer.Role;
+        this.nodes = parent.layer.roleList;
         console.log(this.Role);
-        console.log(this.roleList);
+        console.log(parent.layer.roleList);
     }
 })
