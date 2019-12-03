@@ -22,4 +22,14 @@ public class SysResourceServiceImpl extends tservisceIpm<SysResource> implements
 
         return resourceMapper.selectByRid(rid);
     }
+
+    @Override
+    public int deleteByRid(Long roleId) {
+        return resourceMapper.deleteByRid(roleId);
+    }
+
+    @Override
+    public int insertBatch(Long roleId, List<Long> Resources) {
+        return resourceMapper.insertBatch(roleId,Resources);
+    }
 }

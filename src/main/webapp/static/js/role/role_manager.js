@@ -4,6 +4,12 @@ let em = new Vue({
         return {
             Role: {},
             roleList: {},
+            map: {
+                resourceIds: [],
+                offIds: [],
+                roleId: ''
+            },
+
             setting: {
                 data: {
                     key: {
@@ -28,17 +34,23 @@ let em = new Vue({
                         pIdKey: 'parentId'
                     }
                 },
-                callback: {onClick: this.offTreeClick},
+                callback: {onClick: ''},
                 view: {fontCss: this.changeColor},
-                check: {enable: true},
-                officeNodes: []
-            }
+                check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    chkboxType: {"Y": "s", "N": "s"}
+                },
+                officeNodes: [],
+            },
+            oofTreeObj: '',
+            treeObj: ''
         }
     },
     methods: {
         changeScope: function () {
-            //根据被选中元素进行判断，如果被选中的dataScope是9则显示公司树，如果不是则隐藏公司树
-           let option = $("#chosenSelectEdit option:selected");
+            //如果被选中的dataScope是9则显示公司树，如果不是则隐藏公司树
+            let option = $("#chosenSelectEdit option:selected");
 
             if (option.val() == 9) {
                 $("#treeSelectOfficeEdit").css("display", "inline-block");
@@ -48,7 +60,6 @@ let em = new Vue({
             // console.log(this.option.val())
 
         },
-
         initTree: function () {
             axios({
                 url: 'manager/resource/list'
@@ -61,7 +72,8 @@ let em = new Vue({
                         }
                     }
                 }
-                $.fn.zTree.init($("#select-treetreeSelectResEdit"), this.officeSetting, this.nodes);
+                let treeObj = $.fn.zTree.init($("#select-treetreeSelectResEdit"), this.setting, this.nodes);
+                this.treeObj = treeObj;
             }).catch(
                 function (error) {
                     layer.msg(error)
@@ -77,18 +89,47 @@ let em = new Vue({
                     "id": 0,
                     "name": "所有机构"
                 }
-                let treeObject = $.fn.zTree.init($("#select-treetreeSelectOfficeEdit"), this.setting, this.officeNodes);
-                this.treeObj=treeObject;
+                let treeObject = $.fn.zTree.init($("#select-treetreeSelectOfficeEdit"), this.officeSetting, this.officeNodes);
+                this.oofTreeObj = treeObject;
             }).catch(function (error) {
                 layer.msg(error)
             })
         },
-        TreeClick:function (event, treeId, treeNode) {
+        saveNewRoles: function (rId) {
+            this.map.resourceIds = [];
+            this.map.offIds = [];
+            this.map.roleId=rId;
+            /*取得resource的id数组*/
+            let treeNodes = this.treeObj.transformToArray(this.treeObj.getNodes());
+            console.log("start");
+            for (let index in treeNodes) {
+                if (treeNodes[index].checked) {
+                    this.map.resourceIds.push(treeNodes[index].id)
+                }
+            }
+            console.log(this.map.resourceIds);
+            /*取得office的id数组*/
+            let offTreeNodes = this.oofTreeObj.transformToArray(this.oofTreeObj.getNodes());
+            console.log("start");
+            for (let index in offTreeNodes) {
+                if (offTreeNodes[index].checked) {
+                    this.map.offIds.push(offTreeNodes[index].id)
+                }
+            }
+            console.log(this.map.offIds);
 
-        },
-        offTreeClick:function (event, treeId, treeNode) {
+            axios({
+                url:'manager/resource/upDataResource',
+                method:'post',
+                data:this.map
+            }).then(response=>{
+                layer.msg(response.data)
+            }).catch(function (error) {
+                layer.msg(error)
+            })
 
-        },
+        }
+
     },
     created: function () {
         this.Role = parent.layer.Role;

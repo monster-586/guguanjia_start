@@ -44,6 +44,7 @@ public class SysResource {
     /**
      * 链接
      */
+    @Transient
     private String url;
 
     /**

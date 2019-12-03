@@ -11,7 +11,9 @@ public interface SysResourceService extends tservice<SysResource>{
 
     List<SysResource> selectRoleResource(Long rid);
 
+    int deleteByRid(Long roleId);
 
+    int insertBatch( Long roleId,List<Long> Resources);
 
 }
 

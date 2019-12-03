@@ -5,10 +5,7 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.dfbz.Listener.SysAreaListener;
 import com.dfbz.config.SpringMybatis;
-import com.dfbz.dao.AreaMapper;
-import com.dfbz.dao.ExamineMapper;
-import com.dfbz.dao.SysRoleMapper;
-import com.dfbz.dao.SysUserMapper;
+import com.dfbz.dao.*;
 import com.dfbz.entity.*;
 import com.dfbz.service.*;
 import com.github.pagehelper.PageInfo;
@@ -274,6 +271,28 @@ SysUserService sysUserService;
         for (SysResource sys_resource : sys_resources) {
             System.out.println(sys_resource);
         }
+    }
+    @Autowired
+    SysResourceMapper sysResourceMapper;
+    @org.junit.Test
+    public void TestResourceIserntBatch(){
+        ArrayList<Long> Resources = new ArrayList<>();
+        Resources.add(190l);
+        Resources.add(195l);
+        Resources.add(204l);
+        Resources.add(205l);
+        int i = sysResourceMapper.insertBatch(1l,Resources);
+    }
+    @Autowired
+    SysOfficeMapper sysOfficeMapper;
+    @org.junit.Test
+    public void TestOffresourceIserntBatch(){
+        ArrayList<Long> offIds = new ArrayList<>();
+        offIds.add(7l);
+        offIds.add(8l);
+        offIds.add(9l);
+        offIds.add(6l);
+        int i = sysOfficeMapper.insertBatch(1l, offIds);
     }
 }
 

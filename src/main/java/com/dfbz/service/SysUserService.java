@@ -16,4 +16,5 @@ public interface SysUserService extends tservice<SysUser> {
 
   List<SysUser> selectHaveRole(Map<String, Object> params);
 
+
 }
